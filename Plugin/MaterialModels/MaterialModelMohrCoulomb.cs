@@ -11,7 +11,8 @@ namespace Plugin.MaterialModels
 {
    public class MaterialModelMohrCoulomb : IMaterialModel
    {
+      private static string[] ElasticModels = new string[] { "Isotropic: Young + Poisson" };
       public string DisplayName { get { return "Mohr-Coulomb"; } }
-
+      public IEnumerable<string> AvailableElasticModels { get { return ElasticModels; } }
    }
 }

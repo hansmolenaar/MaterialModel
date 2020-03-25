@@ -11,11 +11,31 @@
          Name="Formation" 
          HorizontalAlignment="Left" 
          Height="30" 
-         Margin="90,34,0,0" 
+         Margin="80,34,0,0" 
          VerticalAlignment="Top" 
-         Width="227"
+         Width="237"
          Loaded="ComboBoxFormation_Loaded" 
          Text="Formation"
          SelectionChanged="ComboBoxFormation_SelectionChanged" />
+      <ComboBox 
+         Name="MaterialModel" 
+         HorizontalAlignment="Left" 
+         Height="38" Margin="80,104,0,0" 
+         VerticalAlignment="Top" 
+         Width="237"
+         Loaded="ComboBoxMaterialModel_Loaded" 
+         Text="MaterialModel"
+         SelectionChanged="ComboBoxMaterialModel_SelectionChanged"/>
+      <ComboBox 
+         Name="ElasticModel" 
+         HorizontalAlignment="Left" 
+         Margin="80,182,0,0" 
+         VerticalAlignment="Top" 
+         Width="237" 
+         Height="35"
+         Loaded="ComboBoxElasticModel_Loaded" 
+         Text="ElasticModel"
+         SelectionChanged="ComboBoxElasticModel_SelectionChanged"/>
+
    </Grid>
 </Window>

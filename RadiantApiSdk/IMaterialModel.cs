@@ -10,6 +10,7 @@ namespace RadiantApiSdk
    {
       string DisplayName { get; }
 
+      IEnumerable<string> AvailableElasticModels { get; }
       //IEnumerable<IMaterialModelComponent> GeneralProperties { get; }
       //IEnumerable<IMaterialModelComponent> ElasticProperties { get; }
       //IEnumerable<IMaterialModelComponent> InelasticProperties { get; }

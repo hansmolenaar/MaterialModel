@@ -12,7 +12,7 @@ namespace Plugin
    public class AskPlugin : IAskPlugin
    {
       private static IMaterialModel[] m_material = new IMaterialModel[] {
-            new MaterialModelMohrCoulomb(),
+            new MaterialModelLinearElastic(),
             new MaterialModelMohrCoulomb(),
          };
 

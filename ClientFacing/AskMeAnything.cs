@@ -20,7 +20,20 @@ namespace ClientFacing
       private IEnumerable<IMaterialModel> AvailableMaterialModel { get { return m_askPlugin.AvailableMaterialModels; } }
       public IEnumerable<string> Formations { get { return AskRadiant.GetCellCollections().Select(cc => cc.Name); } }
 
-      //public IEnumerable<string> MaterialGroups { get { return AvailableMaterialModel.Select(m => m.MaterialGroup).Distinct(); } }
+      public IEnumerable<string> MaterialModels { get { return AvailableMaterialModel.Select(m => m.DisplayName).Distinct(); } }
+
+      public IEnumerable<string> GetAvailableElasticModels(string materialModel)
+      {
+         var matmodel = AvailableMaterialModel.Where(m => m.DisplayName == materialModel).SingleOrDefault();
+         if (matmodel != null)
+         {
+            return matmodel.AvailableElasticModels;
+         }
+         else
+         {
+            return Enumerable.Empty<string>();
+         }
+      }
 
       //public IEnumerable<string> GetMaterialsInGroup(string materialGroup)
       //{
