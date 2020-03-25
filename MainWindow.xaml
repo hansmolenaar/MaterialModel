@@ -32,10 +32,28 @@
          Margin="80,182,0,0" 
          VerticalAlignment="Top" 
          Width="237" 
-         Height="35"
+         Height="43"
          Loaded="ComboBoxElasticModel_Loaded" 
          Text="ElasticModel"
          SelectionChanged="ComboBoxElasticModel_SelectionChanged"/>
+      <TextBlock HorizontalAlignment="Left" Height="30" Margin="341,34,0,0" Text="Formation" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+      <TextBlock HorizontalAlignment="Left" Height="19" Margin="341,104,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
+      <TextBlock HorizontalAlignment="Left" Height="18" Margin="341,182,0,0" Text="Elastic Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+      <TextBlock HorizontalAlignment="Left" Height="20" Margin="341,264,0,0" Text="Inelastic Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="96"/>
+
+      <ListBox 
+          Name="HelloWorld"         
+         HorizontalAlignment="Left" 
+         Height="88" 
+         Margin="80,264,0,0" 
+         VerticalAlignment="Top" 
+         SelectionMode="Extended"
+         Width="237">
+         <ListBoxItem Content = "XAML Tutorials" />
+         <ListBoxItem Content = "WPF Tutorials" />
+         <ListBoxItem Content = "CS Tutorials" />
+         <ListBoxItem Content = "C++ Tutorials" />
+      </ListBox>
 
    </Grid>
 </Window>
