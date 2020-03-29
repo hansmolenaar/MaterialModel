@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadiantApiSdk
+namespace MaterialModel.RadiantApiSdk
 {
-   public enum TopologicalSupport  {Surface, Volume}
    public interface ICellCollection
    {
       string Name { get; }

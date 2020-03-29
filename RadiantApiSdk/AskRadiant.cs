@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadiantApiSdk
+namespace MaterialModel.RadiantApiSdk
 {
    public static class AskRadiant
    {

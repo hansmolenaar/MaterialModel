@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using RadiantApiSdk;
-using Plugin.MaterialModels;
+using MaterialModel.RadiantApiSdk;
 
-namespace Plugin
+namespace MaterialModel.Plugin
 {
    public class AskPlugin : IAskPlugin
    {
       private static IMaterialModel[] m_material = new IMaterialModel[] {
-            new MaterialModelLinearElastic(),
-            new MaterialModelMohrCoulomb(),
+            new MaterialModelLinearElastic()
          };
 
       public IEnumerable<IMaterialModel> AvailableMaterialModels { get { return m_material; } }

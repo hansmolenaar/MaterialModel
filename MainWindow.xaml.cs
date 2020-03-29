@@ -13,8 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using ClientFacing;
-using RadiantApiSdk;
+using MaterialModel.ClientFacing;
+using MaterialModel.RadiantApiSdk;
 
 namespace MaterialModel
 {

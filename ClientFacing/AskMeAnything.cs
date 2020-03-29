@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Plugin;
-using RadiantApiSdk;
+using MaterialModel.Plugin;
+using MaterialModel.RadiantApiSdk;
 
-namespace ClientFacing
+namespace MaterialModel.ClientFacing
 {
    public class AskMeAnything
    {
@@ -27,7 +27,7 @@ namespace ClientFacing
          var matmodel = AvailableMaterialModel.Where(m => m.DisplayName == materialModel).SingleOrDefault();
          if (matmodel != null)
          {
-            return matmodel.AvailableElasticModels;
+            return matmodel.Elastic.SelectMany(c => c.Categories).Distinct();
          }
          else
          {

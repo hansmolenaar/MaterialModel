@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadiantApiSdk
+namespace MaterialModel.RadiantApiSdk
 {
    public class Formation : ICellCollection
    {
       public string Name { get; }
 
-     public TopologicalSupport Support { get { return TopologicalSupport.Volume; } }
+      public TopologicalSupport Support { get { return TopologicalSupport.Volume; } }
 
       public Formation(string name)
       {

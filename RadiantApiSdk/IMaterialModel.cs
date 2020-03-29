@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RadiantApiSdk
+namespace MaterialModel.RadiantApiSdk
 {
-  public interface IMaterialModel
+   public interface IMaterialModel
    {
       string DisplayName { get; }
 
-      IEnumerable<string> AvailableElasticModels { get; }
-      //IEnumerable<IMaterialModelComponent> GeneralProperties { get; }
-      //IEnumerable<IMaterialModelComponent> ElasticProperties { get; }
-      //IEnumerable<IMaterialModelComponent> InelasticProperties { get; }
-      //IEnumerable<IMaterialModelComponent> ThermalProperties { get; }
+      TopologicalSupport Support { get; }
+      IEnumerable<IMaterialModelProperty> Elastic { get; }
+      IEnumerable<IMaterialModelProperty> Inelastic { get; }
+      IEnumerable<IMaterialModelProperty> Temperature { get; }
    }
 }
