@@ -143,5 +143,16 @@ namespace MaterialModel.RadiantApiSdk.Property
       {
          return new SingleValuWrapped(CreateFrictionAngle(), "Dilation Angle");
       }
+
+      public static IPropertySingleValue CreateWithPostFix(IPropertySingleValue prop, string postFix)
+      {
+         return new SingleValuWrapped(prop, prop.Name + postFix);
+      }
+
+      public static IPropertySingleValue CreateTensionCutoff()
+      {
+         return new SingleValueImpl("Tension Cutoff", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+      }
+      
    }
 }

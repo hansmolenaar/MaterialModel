@@ -15,11 +15,19 @@ namespace MaterialModel.Plugin
    {
       private const string s_youngAndPoisson = "Young+Poisson";
       private const string s_bulkAndShear = "Bulk and Shear Modulus";
+      public const string TranseverseIsotropic = "Transverse Isotropic";
       private IMaterialModelProperty[] m_components = new IMaterialModelProperty[] {
          new MaterialModelProperty(PropertySingleValueFactory.CreateYoungModulus(), s_youngAndPoisson),
          new MaterialModelProperty(PropertySingleValueFactory.CreatePoissonRatio(), s_youngAndPoisson),
          new MaterialModelProperty(PropertySingleValueFactory.CreateBulkModulus(), s_bulkAndShear),
-          new MaterialModelProperty(PropertySingleValueFactory.CreateShearModulus(), s_bulkAndShear),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateShearModulus(), s_bulkAndShear),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateShearModulus(), s_bulkAndShear),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateShearModulus(), s_bulkAndShear),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateYoungModulus(), " P"), TranseverseIsotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateYoungModulus(), " T"), TranseverseIsotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " P"), TranseverseIsotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " PT"), TranseverseIsotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " TP"), TranseverseIsotropic),
       };
 
       public string DisplayName { get { return "Linear Elastic"; } }

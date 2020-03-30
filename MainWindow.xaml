@@ -20,7 +20,7 @@
       <ComboBox 
          Name="MaterialModel" 
          HorizontalAlignment="Left" 
-         Height="38" Margin="80,104,0,0" 
+         Height="38" Margin="80,85,0,0" 
          VerticalAlignment="Top" 
          Width="237"
          Loaded="ComboBoxMaterialModel_Loaded" 
@@ -29,29 +29,29 @@
       <ComboBox 
          Name="ElasticModel" 
          HorizontalAlignment="Left" 
-         Margin="80,182,0,0" 
+         Margin="239,144,0,0" 
          VerticalAlignment="Top" 
-         Width="237" 
-         Height="43"
+         Width="243" 
+         Height="39"
          Loaded="ComboBoxElasticModel_Loaded" 
          Text="ElasticModel"
          SelectionChanged="ComboBoxElasticModel_SelectionChanged"/>
       <ComboBox 
          Name="Inelastic" 
          HorizontalAlignment="Left" 
-         Height="38" 
-         Margin="80,264,0,0" 
+         Height="42" 
+         Margin="239,201,0,0" 
          VerticalAlignment="Top" 
-         Width="237"
+         Width="243"
          Loaded="ComboBoxInelasticModel_Loaded" 
          Text="InelasticModel"
          SelectionChanged="ComboBoxInelasticModel_SelectionChanged"/>
-      
+
       <TextBlock HorizontalAlignment="Left" Height="30" Margin="341,34,0,0" Text="Formation" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-      <TextBlock HorizontalAlignment="Left" Height="19" Margin="341,104,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
-      <TextBlock HorizontalAlignment="Left" Height="18" Margin="341,182,0,0" Text="Elastic Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
-      <TextBlock HorizontalAlignment="Left" Height="20" Margin="341,264,0,0" Text="Inelastic Components" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-      
+      <TextBlock HorizontalAlignment="Left" Height="19" Margin="341,85,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
+      <TextBlock HorizontalAlignment="Left" Height="18" Margin="504,144,0,0" Text="Elastic Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+      <TextBlock HorizontalAlignment="Left" Height="20" Margin="504,204,0,0" Text="Inelastic Components" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+
 
    </Grid>
 </Window>
