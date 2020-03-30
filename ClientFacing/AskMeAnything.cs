@@ -11,13 +11,14 @@ namespace MaterialModel.ClientFacing
 {
    public class AskMeAnything
    {
-      private IAskPlugin m_askPlugin = new AskPlugin();
+      public IAskPlugin AskPlugin { get; }
 
       public AskMeAnything()
       {
+         AskPlugin = new AskPlugin();
       }
 
-      public IEnumerable<IMaterialModel> AvailableMaterialModel { get { return m_askPlugin.AvailableMaterialModels; } }
+      public IEnumerable<IMaterialModel> AvailableMaterialModel { get { return AskPlugin.AvailableMaterialModels; } }
       public IEnumerable<string> Formations { get { return AskRadiant.GetCellCollections().Select(cc => cc.Name); } }
 
       public IEnumerable<string> MaterialModels { get { return AvailableMaterialModel.Select(m => m.DisplayName).Distinct(); } }
@@ -35,32 +36,12 @@ namespace MaterialModel.ClientFacing
          }
       }
 
-      //public IEnumerable<string> GetMaterialsInGroup(string materialGroup)
-      //{
-      //   return AvailableMaterialModel.Where(m => m.MaterialGroup == materialGroup).Select(m => m.MaterialDisplayName);
-      //}
+      public bool TryGetCellCollection( string name, out ICellCollection cellCollection)
+      {
+         cellCollection = AskRadiant.GetCellCollections().Where(c => c.Name == name).SingleOrDefault();
+         return cellCollection != null;
+      }
 
-      //public IEnumerable<MaterialModelPropertyIDO> GetMaterialModelPropertyIDOs(string materialModel)
-      //{
-      //   var material = AvailableMaterialModel.Where(m => m.MaterialDisplayName.Equals(materialModel)).FirstOrDefault();
-      //   if (material != null)
-      //   {
-      //      return material.GeneralProperties.Concat(material.ElasticProperties).Concat(material.InelasticProperties).Select(p => new MaterialModelPropertyIDO(p));
-      //   }
-      //   return Enumerable.Empty<MaterialModelPropertyIDO>();
-      //}
-
-      //public MaterialModelIDO GetMaterialModeIDO(string materialModel)
-      //{
-      //   var material = AvailableMaterialModel.Where(m => m.MaterialDisplayName.Equals(materialModel)).FirstOrDefault();
-      //   if ( material != null)
-      //   {
-      //      return new MaterialModelIDO(material);
-      //   }
-      //   else
-      //   { 
-      //      return null; ;
-      //   }
-      //}
+     
    }
 }

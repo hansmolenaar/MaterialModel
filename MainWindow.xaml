@@ -51,6 +51,18 @@
       <TextBlock HorizontalAlignment="Left" Height="19" Margin="341,85,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
       <TextBlock HorizontalAlignment="Left" Height="18" Margin="504,144,0,0" Text="Elastic Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
       <TextBlock HorizontalAlignment="Left" Height="20" Margin="504,204,0,0" Text="Inelastic Components" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+      
+      <DataGrid 
+         Name="Properties" 
+         Loaded="MaterialProperties_Loaded"  
+         AutoGenerateColumns="True" 
+         Grid.Column="0" 
+         Grid.Row="0"
+         HorizontalAlignment="Left" 
+         Height="160" 
+         Margin="80,264,0,0" 
+         VerticalAlignment="Top" 
+         Width="402"/>
 
 
    </Grid>

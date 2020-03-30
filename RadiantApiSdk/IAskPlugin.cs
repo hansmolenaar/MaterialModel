@@ -9,5 +9,6 @@ namespace MaterialModel.RadiantApiSdk
    public interface IAskPlugin
    {
       IEnumerable<IMaterialModel> AvailableMaterialModels { get; }
+      IEnumerable<IMaterialModelProperty> GetGeneralProperties(TopologicalSupport support);
    }
 }

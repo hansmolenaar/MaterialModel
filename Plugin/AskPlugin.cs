@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MaterialModel.RadiantApiSdk;
+using MaterialModel.RadiantApiSdk.Property;
 
 namespace MaterialModel.Plugin
 {
@@ -16,5 +17,13 @@ namespace MaterialModel.Plugin
          };
 
       public IEnumerable<IMaterialModel> AvailableMaterialModels { get { return m_material; } }
+
+      public IEnumerable<IMaterialModelProperty> GetGeneralProperties(TopologicalSupport support)
+      {
+         if ( support == TopologicalSupport.Volume)
+         {
+            yield return new MaterialModelProperty(PropertySingleValueFactory.CreateDensity());
+         }
+      }
    }
 }

@@ -17,6 +17,7 @@ namespace MaterialModel.Plugin
       private const string s_nonAssociated = "Non-associated Flow";
       private IMaterialModelProperty[] m_components = new IMaterialModelProperty[] {
          new MaterialModelProperty(PropertySingleValueFactory.CreateFrictionAngle()),
+          new MaterialModelProperty(PropertySingleValueFactory.CreateCohesion()),
          new MaterialModelProperty(PropertySingleValueFactory.CreateTensionCutoff(), s_yieldSurface),
          new MaterialModelProperty(PropertySingleValueFactory.CreateDilationAngle(), s_nonAssociated),
       };

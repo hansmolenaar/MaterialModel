@@ -11,7 +11,11 @@ namespace MaterialModel.RadiantApiSdk.Property
    {
       internal SingleValueImpl(string name, IQuantity q, params IValueBound[] bounds)
       {
-         Name = Name;
+         if ( string.IsNullOrEmpty(name))
+         {
+            throw new Exception("SingleValueImpl: expect name");
+         }
+         Name = name;
          Quantity = q;
          m_valueBounds = bounds.ToArray();
          Clear();
@@ -76,6 +80,10 @@ namespace MaterialModel.RadiantApiSdk.Property
       private IPropertySingleValue BaseProp { get; }
       internal SingleValuWrapped(IPropertySingleValue prop, string name)
       {
+         if ( string.IsNullOrEmpty(name))
+         {
+            throw new Exception("SingleValuWrapped: expect property name");
+         }
          Name = name;
          BaseProp = prop;
       }
@@ -112,9 +120,17 @@ namespace MaterialModel.RadiantApiSdk.Property
 
    public static class PropertySingleValueFactory
    {
+      public static IPropertySingleValue CreateDensity()
+      {
+         var result = new SingleValueImpl("Rock density", QuantityFactory.Density, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+         return result;
+      }
+
+      
       public static IPropertySingleValue CreateYoungModulus()
       {
-         return new SingleValueImpl("YoundModulus", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+         var result = new SingleValueImpl("YoundModulus", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+         return result;
       }
 
       public static IPropertySingleValue CreatePoissonRatio()
@@ -153,6 +169,11 @@ namespace MaterialModel.RadiantApiSdk.Property
       {
          return new SingleValueImpl("Tension Cutoff", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
       }
-      
+
+      public static IPropertySingleValue CreateCohesion()
+      {
+         return new SingleValueImpl("Cohesion", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+      }
+
    }
 }

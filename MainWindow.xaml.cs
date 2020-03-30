@@ -21,6 +21,8 @@ namespace MaterialModel
       private SelectionRange m_selectionRange;
       private SelectionInelastic m_selectionInelastic;
 
+      private DataGrid _dataGridProperties;
+
       private AskMeAnything m_askMeAnything { get; }
 
       public MainWindow()
@@ -104,7 +106,6 @@ namespace MaterialModel
 
       #endregion
 
-
       #region Inelastic Models
 
       private void ComboBoxInelasticModel_Loaded(object sender, RoutedEventArgs e)
@@ -126,8 +127,54 @@ namespace MaterialModel
          // ... Set SelectedItem as Window Title.
          string value = m_selectionInelastic.SelectionChanged(sender, e);
          this.Title = "Selected: " + value;
+         MaterialProperties_Fill();
       }
 
+      #endregion
+
+      #region Material Properties
+
+      private void MaterialProperties_Loaded(object sender, RoutedEventArgs e)
+      {
+         _dataGridProperties = sender as DataGrid;
+         MaterialProperties_Fill();
+      }
+
+      private void MaterialProperties_Fill()
+      {
+         if (_dataGridProperties != null)
+         {
+            IMaterialModel materialModel;
+            if (m_askMeAnything.AskPlugin.TryGetMaterialModel(m_selectionMaterialModel.CurrentSelection, out materialModel))
+            {
+               var gprops = Enumerable.Empty<IMaterialModelProperty>();
+               ICellCollection cellCollection;
+               if (m_askMeAnything.TryGetCellCollection(m_selectionRange.CurrentSelection, out cellCollection))
+               {
+                  gprops = m_askMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Support);
+               }
+               var eCategory = m_selectionElasticModel.CurrentSelection;
+               var eProps = materialModel.Elastic.Where(p => p.Categories.Contains(eCategory) || !p.Categories.Any()).ToArray();
+               var iCategory = m_selectionInelastic.CurrentSelection;
+               var iprops = materialModel.Inelastic.Where(p => p.Categories.Contains(iCategory) || !p.Categories.Any()).ToArray();
+               var uniquePropName = new HashSet<string>();
+               var props = new List<MaterialModelPropertyIDO>();
+               foreach (var p in gprops.Concat(eProps).Concat(iprops))
+               {
+                  if (!uniquePropName.Contains(p.Property.Name))
+                  {
+                     uniquePropName.Add(p.Property.Name);
+                     props.Add(new MaterialModelPropertyIDO(p));
+                  }
+               }
+               _dataGridProperties.ItemsSource = props;
+            }
+            else
+            {
+               _dataGridProperties.ItemsSource = Enumerable.Empty<MaterialModelPropertyIDO>();
+            }
+         }
+      }
       #endregion
 
    }
