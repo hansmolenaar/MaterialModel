@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 using MaterialModel.ClientFacing;
 using MaterialModel.RadiantApiSdk;
-
+using MaterialModel.GUI;
 namespace MaterialModel
 {
    /// <summary>
@@ -25,15 +25,15 @@ namespace MaterialModel
    {
       private const string FormationDefault = "-- Select Formation--";
       private const string MaterialModelDefault = "-- Select Material Model --";
-      private const string ElasticModelDefault = "-- Select Elastic Model --";
 
       private ComboBox _comboBoxFormations;
       private ComboBox _comboBoxMaterialModels;
-      private ComboBox _comboBoxElasticModels;
 
 
       private string _currentMaterialModel = MaterialModelDefault;
-      private string _currentElasaticModel = ElasticModelDefault;
+      private string _currentElasaticModel = SelectionElastic.ElasticModelDefault;
+
+      private SelectionElastic m_selectionElasticModel;
 
       private AskMeAnything m_askMeAnything { get; }
 
@@ -101,9 +101,9 @@ namespace MaterialModel
          this.Title = "Selected: " + value;
 
          // Forward selection
-         if (_comboBoxElasticModels != null)
+         if (m_selectionElasticModel != null)
          {
-            ComboBoxElasticModel_Loaded(_comboBoxElasticModels, null);
+            ComboBoxElasticModel_Loaded(m_selectionElasticModel.MyComboBox, null);
          }
       }
 
@@ -125,10 +125,18 @@ namespace MaterialModel
 
          // ... Get the ComboBox reference.
          var comboBox = sender as ComboBox;
-         _comboBoxElasticModels = comboBox;
+         if ( m_selectionElasticModel == null)
+         {
+            m_selectionElasticModel = new SelectionElastic(comboBox, null);
+         }
+         else if ( comboBox != m_selectionElasticModel.MyComboBox)
+         {
+            throw new Exception("Unexpected combo box");
+         }
+       
 
          // ... Assign the ItemsSource to the List.
-         comboBox.ItemsSource = new string[] { ElasticModelDefault }.Concat(m_askMeAnything.GetAvailableElasticModels(_currentMaterialModel));
+         comboBox.ItemsSource = new string[] { SelectionElastic.ElasticModelDefault }.Concat(m_askMeAnything.GetAvailableElasticModels(_currentMaterialModel));
 
          // ... Make the first item selected.
          comboBox.SelectedIndex = 0;
@@ -150,7 +158,7 @@ namespace MaterialModel
          if (comboBox != null)
          {
             comboBox.SelectedIndex = 0;
-            _currentElasaticModel = ElasticModelDefault;
+            _currentElasaticModel = SelectionElastic.ElasticModelDefault;
          }
       }
 
