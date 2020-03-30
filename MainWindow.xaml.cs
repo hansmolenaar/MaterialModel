@@ -49,17 +49,13 @@ namespace MaterialModel
          if (m_selectionRange == null)
          {
             m_selectionRange = new SelectionRange(comboBox,m_askMeAnything, null);
+            m_selectionRange.Init();
          }
          else if (comboBox != m_selectionRange.MyComboBox)
          {
             throw new Exception("Unexpected combo box");
          }
 
-         // ... Assign the ItemsSource to the List.
-         comboBox.ItemsSource = new string[] { SelectionRange.RangeDefault }.Concat(m_askMeAnything.Formations);
-
-         // ... Make the first item selected.
-         comboBox.SelectedIndex = 0;
       }
 
       private void ComboBoxFormation_SelectionChanged(object sender, SelectionChangedEventArgs e)
