@@ -11,7 +11,8 @@ namespace MaterialModel.Plugin
    public class AskPlugin : IAskPlugin
    {
       private static IMaterialModel[] m_material = new IMaterialModel[] {
-            new MaterialModelLinearElastic()
+            new MaterialModelLinearElastic(),
+            new MaterialModelMohrCoulomb(),
          };
 
       public IEnumerable<IMaterialModel> AvailableMaterialModels { get { return m_material; } }

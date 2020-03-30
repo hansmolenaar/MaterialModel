@@ -131,5 +131,17 @@ namespace MaterialModel.RadiantApiSdk.Property
       {
          return new SingleValuWrapped(CreateYoungModulus(), "ShearModulus");
       }
+
+
+      public static IPropertySingleValue CreateFrictionAngle()
+      {
+         return new SingleValueImpl("FrictionAngle", QuantityFactory.Angle, ValueBoundFactory.Create(-Math.PI, ValueBoundType.GE), ValueBoundFactory.Create(Math.PI, ValueBoundType.LE));
+      }
+
+
+      public static IPropertySingleValue CreateDilationAngle()
+      {
+         return new SingleValuWrapped(CreateFrictionAngle(), "Dilation Angle");
+      }
    }
 }

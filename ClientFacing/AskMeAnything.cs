@@ -17,7 +17,7 @@ namespace MaterialModel.ClientFacing
       {
       }
 
-      private IEnumerable<IMaterialModel> AvailableMaterialModel { get { return m_askPlugin.AvailableMaterialModels; } }
+      public IEnumerable<IMaterialModel> AvailableMaterialModel { get { return m_askPlugin.AvailableMaterialModels; } }
       public IEnumerable<string> Formations { get { return AskRadiant.GetCellCollections().Select(cc => cc.Name); } }
 
       public IEnumerable<string> MaterialModels { get { return AvailableMaterialModel.Select(m => m.DisplayName).Distinct(); } }

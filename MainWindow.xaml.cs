@@ -19,6 +19,7 @@ namespace MaterialModel
       private SelectionElastic m_selectionElasticModel;
       private SelectionMaterialModel m_selectionMaterialModel;
       private SelectionRange m_selectionRange;
+      private SelectionInelastic m_selectionInelastic;
 
       private AskMeAnything m_askMeAnything { get; }
 
@@ -98,6 +99,32 @@ namespace MaterialModel
       {
          // ... Set SelectedItem as Window Title.
          string value = m_selectionElasticModel.SelectionChanged(sender, e);
+         this.Title = "Selected: " + value;
+      }
+
+      #endregion
+
+
+      #region Inelastic Models
+
+      private void ComboBoxInelasticModel_Loaded(object sender, RoutedEventArgs e)
+      {
+
+         // ... Get the ComboBox reference.
+         var comboBox = sender as ComboBox;
+         if (m_selectionInelastic == null)
+         {
+            m_selectionInelastic = new SelectionInelastic(comboBox, m_askMeAnything, m_selectionElasticModel);
+            m_selectionElasticModel.SetNext(m_selectionInelastic);
+         }
+         m_selectionInelastic.CheckComboBox(comboBox);
+         m_selectionInelastic.Init();
+      }
+
+      private void ComboBoxInelasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+      {
+         // ... Set SelectedItem as Window Title.
+         string value = m_selectionInelastic.SelectionChanged(sender, e);
          this.Title = "Selected: " + value;
       }
 
