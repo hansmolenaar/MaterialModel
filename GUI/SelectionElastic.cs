@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionElastic : ISelection
+   public class SelectionElastic : ISelectionComboBox
    {
       public const string ElasticModelDefault = "-- Select Elastic Model --";
       public ComboBox MyComboBox { get; }

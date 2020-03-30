@@ -5,13 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using MaterialModel.ClientFacing;
 using MaterialModel.RadiantApiSdk;
@@ -23,10 +16,6 @@ namespace MaterialModel
    /// </summary>
    public partial class MainWindow : Window
    {
-
-      private ComboBox _comboBoxFormations;
-
-
       private SelectionElastic m_selectionElasticModel;
       private SelectionMaterialModel m_selectionMaterialModel;
       private SelectionRange m_selectionRange;
@@ -48,34 +37,24 @@ namespace MaterialModel
          var comboBox = sender as ComboBox;
          if (m_selectionRange == null)
          {
-            m_selectionRange = new SelectionRange(comboBox,m_askMeAnything, null);
+            m_selectionRange = new SelectionRange(comboBox, m_askMeAnything, null);
             m_selectionRange.Init();
          }
-         else if (comboBox != m_selectionRange.MyComboBox)
-         {
-            throw new Exception("Unexpected combo box");
-         }
+         m_selectionRange.CheckComboBox(comboBox);
 
       }
 
       private void ComboBoxFormation_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         // ... Get the ComboBox.
-         var comboBox = sender as ComboBox;
-
-         // ... Set SelectedItem as Window Title.
-         string value = comboBox.SelectedItem as string;
+         string value = m_selectionRange.SelectionChanged(sender, e);
          this.Title = "Selected: " + value;
-
-         // Reset rest
-         m_selectionRange.ClearTail();
       }
 
       #endregion
 
       #region MaterialModels
 
-     
+
       private void ComboBoxMaterialModel_Loaded(object sender, RoutedEventArgs e)
       {
 
@@ -85,29 +64,16 @@ namespace MaterialModel
          {
             m_selectionMaterialModel = new SelectionMaterialModel(comboBox, m_askMeAnything, m_selectionRange);
             m_selectionRange.SetNext(m_selectionMaterialModel);
-            m_selectionMaterialModel.Init();
-         }
-         else if (comboBox != m_selectionMaterialModel.MyComboBox)
-         {
-            throw new Exception("Unexpected combo box");
          }
 
-
-
+         m_selectionMaterialModel.CheckComboBox(comboBox);
+         m_selectionMaterialModel.Init();
       }
 
       private void ComboBoxMaterialModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         // ... Get the ComboBox.
-         var comboBox = sender as ComboBox;
-
-         // ... Set SelectedItem as Window Title.
-         string value = comboBox.SelectedItem as string;
-         m_selectionMaterialModel.CurrentSelection = value;
+         string value = m_selectionMaterialModel.SelectionChanged(sender, e);
          this.Title = "Selected: " + value;
-
-         // Forward selection
-         m_selectionMaterialModel.ClearTail();
       }
 
       #endregion
@@ -121,30 +87,18 @@ namespace MaterialModel
          var comboBox = sender as ComboBox;
          if (m_selectionElasticModel == null)
          {
-            m_selectionElasticModel = new SelectionElastic(comboBox,m_askMeAnything, m_selectionMaterialModel);
+            m_selectionElasticModel = new SelectionElastic(comboBox, m_askMeAnything, m_selectionMaterialModel);
             m_selectionMaterialModel.SetNext(m_selectionElasticModel);
          }
-         else if (comboBox != m_selectionElasticModel.MyComboBox)
-         {
-            throw new Exception("Unexpected combo box");
-         }
-
-
-         // ... Assign the ItemsSource to the List.
+         m_selectionElasticModel.CheckComboBox(comboBox);
          m_selectionElasticModel.Init();
       }
 
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         // ... Get the ComboBox.
-         var comboBox = sender as ComboBox;
-
          // ... Set SelectedItem as Window Title.
-         string value = comboBox.SelectedItem as string;
-         m_selectionElasticModel.CurrentSelection = value;
+         string value = m_selectionElasticModel.SelectionChanged(sender, e);
          this.Title = "Selected: " + value;
-
-         m_selectionElasticModel.ClearTail();
       }
 
       #endregion

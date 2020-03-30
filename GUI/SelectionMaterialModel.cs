@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionMaterialModel : ISelection
+   public class SelectionMaterialModel : ISelectionComboBox
    {
       public const string MaterialModelDefault = "-- Select Material Model --";
       public ComboBox MyComboBox { get; }

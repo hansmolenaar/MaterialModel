@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionRange : ISelection
+   public class SelectionRange : ISelectionComboBox
    {
       public const string RangeDefault = "-- Select Formation--";
       public ComboBox MyComboBox { get; }
