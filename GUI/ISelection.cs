@@ -10,5 +10,7 @@ namespace MaterialModel.GUI
       ISelection Next { get; }
       void Clear();
 
+      void Init();
+
    }
 }

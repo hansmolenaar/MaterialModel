@@ -6,14 +6,14 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionElastic : ISelection
+   public class SelectionRange : ISelection
    {
-      public const string ElasticModelDefault = "-- Select Elastic Model --";
+      public const string RangeDefault = "-- Select Formation--";
       public ComboBox MyComboBox { get; }
 
       private AskMeAnything m_askMeAnything { get; }
 
-      public SelectionElastic(ComboBox comboBox, AskMeAnything ame, ISelection prev)
+      public SelectionRange(ComboBox comboBox,AskMeAnything ame, ISelection prev)
       {
          m_askMeAnything = ame;
          MyComboBox = comboBox;
@@ -32,18 +32,18 @@ namespace MaterialModel.GUI
       public void Clear()
       {
          MyComboBox.SelectedIndex = 0;
-         CurrentSelection = ElasticModelDefault;
+         CurrentSelection = RangeDefault;
       }
-
-      public string CurrentSelection { get; set; }
 
       public void Init()
       {
-         var matmod = Previous as SelectionMaterialModel;
-         MyComboBox.ItemsSource = new string[] { SelectionElastic.ElasticModelDefault }.Concat(m_askMeAnything.GetAvailableElasticModels(matmod.CurrentSelection));
+         // ... Assign the ItemsSource to the List.
+         MyComboBox.ItemsSource = new string[] { SelectionRange.RangeDefault }.Concat(m_askMeAnything.Formations);
 
          // ... Make the first item selected.
          MyComboBox.SelectedIndex = 0;
       }
+
+      public string CurrentSelection { get; set; }
    }
 }

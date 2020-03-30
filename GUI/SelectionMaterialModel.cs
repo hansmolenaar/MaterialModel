@@ -1,6 +1,7 @@
-﻿using System;
+﻿using MaterialModel.ClientFacing;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace MaterialModel.GUI
@@ -9,8 +10,12 @@ namespace MaterialModel.GUI
    {
       public const string MaterialModelDefault = "-- Select Material Model --";
       public ComboBox MyComboBox { get; }
-      public SelectionMaterialModel(ComboBox comboBox, ISelection prev)
+
+      private AskMeAnything m_askMeAnything { get; }
+
+      public SelectionMaterialModel(ComboBox comboBox, AskMeAnything ame, ISelection prev)
       {
+         m_askMeAnything = ame;
          MyComboBox = comboBox;
          Previous = prev;
          Clear();
@@ -28,6 +33,15 @@ namespace MaterialModel.GUI
       {
          MyComboBox.SelectedIndex = 0;
          CurrentSelection = MaterialModelDefault;
+      }
+
+      public void Init()
+      {
+         // ... Assign the ItemsSource to the List.
+         MyComboBox.ItemsSource = new string[] { SelectionMaterialModel.MaterialModelDefault }.Concat(m_askMeAnything.MaterialModels);
+
+         // ... Make the first item selected.
+         MyComboBox.SelectedIndex = 0;
       }
 
       public string CurrentSelection { get;  set; }
