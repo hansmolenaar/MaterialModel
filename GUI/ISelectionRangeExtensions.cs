@@ -8,10 +8,15 @@ namespace MaterialModel.GUI
    {
       public static void ClearTail(this ISelection selection)
       {
+         var nxt = selection.Next;
+         while ( nxt != null)
+         {
+            nxt.Clear();
+            nxt = nxt.Next;
+         }
          if ( selection.Next != null)
          {
-            selection.Next.Clear();
-            selection.Next.ClearTail();
+            selection.Next.Init();
          }
       }
    }

@@ -73,11 +73,6 @@ namespace MaterialModel
 
          // Reset rest
          m_selectionRange.ClearTail();
-
-         if (m_selectionMaterialModel != null)
-         {
-            m_selectionMaterialModel.Init();
-         }
       }
 
       #endregion
@@ -117,10 +112,6 @@ namespace MaterialModel
 
          // Forward selection
          m_selectionMaterialModel.ClearTail();
-         if ( m_selectionElasticModel != null)
-         {
-            m_selectionElasticModel.Init();
-         }
       }
 
       #endregion
@@ -136,7 +127,6 @@ namespace MaterialModel
          {
             m_selectionElasticModel = new SelectionElastic(comboBox,m_askMeAnything, m_selectionMaterialModel);
             m_selectionMaterialModel.SetNext(m_selectionElasticModel);
-            m_selectionElasticModel.Init();
          }
          else if (comboBox != m_selectionElasticModel.MyComboBox)
          {
@@ -145,7 +135,7 @@ namespace MaterialModel
 
 
          // ... Assign the ItemsSource to the List.
-         m_selectionMaterialModel.Init();
+         m_selectionElasticModel.Init();
       }
 
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
