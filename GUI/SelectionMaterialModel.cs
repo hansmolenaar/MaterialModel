@@ -5,11 +5,11 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionElastic : ISelection
+   public class SelectionMaterialModel : ISelection
    {
-      public const string ElasticModelDefault = "-- Select Elastic Model --";
+      public const string MaterialModelDefault = "-- Select Material Model --";
       public ComboBox MyComboBox { get; }
-      public SelectionElastic(ComboBox comboBox, ISelection prev)
+      public SelectionMaterialModel(ComboBox comboBox, ISelection prev)
       {
          MyComboBox = comboBox;
          Previous = prev;
@@ -27,9 +27,9 @@ namespace MaterialModel.GUI
       public void Clear()
       {
          MyComboBox.SelectedIndex = 0;
-         CurrentSelection = ElasticModelDefault;
+         CurrentSelection = MaterialModelDefault;
       }
 
-      public string CurrentSelection { get; set; }
+      public string CurrentSelection { get;  set; }
    }
 }

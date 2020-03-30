@@ -24,16 +24,12 @@ namespace MaterialModel
    public partial class MainWindow : Window
    {
       private const string FormationDefault = "-- Select Formation--";
-      private const string MaterialModelDefault = "-- Select Material Model --";
 
       private ComboBox _comboBoxFormations;
       private ComboBox _comboBoxMaterialModels;
 
-
-      private string _currentMaterialModel = MaterialModelDefault;
-      private string _currentElasaticModel = SelectionElastic.ElasticModelDefault;
-
       private SelectionElastic m_selectionElasticModel;
+      private SelectionMaterialModel m_selectionMaterialModel;
 
       private AskMeAnything m_askMeAnything { get; }
 
@@ -81,10 +77,18 @@ namespace MaterialModel
 
          // ... Get the ComboBox reference.
          var comboBox = sender as ComboBox;
-         _comboBoxMaterialModels = comboBox;
+         if (m_selectionMaterialModel == null)
+         {
+            m_selectionMaterialModel = new SelectionMaterialModel(comboBox, null);
+         }
+         else if (comboBox != m_selectionMaterialModel.MyComboBox)
+         {
+            throw new Exception("Unexpected combo box");
+         }
+
 
          // ... Assign the ItemsSource to the List.
-         comboBox.ItemsSource = new string[] { MaterialModelDefault }.Concat(m_askMeAnything.MaterialModels);
+         comboBox.ItemsSource = new string[] { SelectionMaterialModel.MaterialModelDefault }.Concat(m_askMeAnything.MaterialModels);
 
          // ... Make the first item selected.
          comboBox.SelectedIndex = 0;
@@ -97,7 +101,7 @@ namespace MaterialModel
 
          // ... Set SelectedItem as Window Title.
          string value = comboBox.SelectedItem as string;
-         _currentMaterialModel = value;
+         m_selectionMaterialModel.CurrentSelection = value;
          this.Title = "Selected: " + value;
 
          // Forward selection
@@ -109,10 +113,9 @@ namespace MaterialModel
 
       private void ComboBoxMaterialModel_Reset(ComboBox comboBox)
       {
-         if (comboBox != null)
+         if (m_selectionMaterialModel != null)
          {
-            comboBox.SelectedIndex = 0;
-            _currentMaterialModel = MaterialModelDefault;
+            m_selectionMaterialModel.Clear();
          }
       }
 
@@ -125,18 +128,18 @@ namespace MaterialModel
 
          // ... Get the ComboBox reference.
          var comboBox = sender as ComboBox;
-         if ( m_selectionElasticModel == null)
+         if (m_selectionElasticModel == null)
          {
             m_selectionElasticModel = new SelectionElastic(comboBox, null);
          }
-         else if ( comboBox != m_selectionElasticModel.MyComboBox)
+         else if (comboBox != m_selectionElasticModel.MyComboBox)
          {
             throw new Exception("Unexpected combo box");
          }
-       
+
 
          // ... Assign the ItemsSource to the List.
-         comboBox.ItemsSource = new string[] { SelectionElastic.ElasticModelDefault }.Concat(m_askMeAnything.GetAvailableElasticModels(_currentMaterialModel));
+         comboBox.ItemsSource = new string[] { SelectionElastic.ElasticModelDefault }.Concat(m_askMeAnything.GetAvailableElasticModels(m_selectionMaterialModel.CurrentSelection));
 
          // ... Make the first item selected.
          comboBox.SelectedIndex = 0;
@@ -149,16 +152,15 @@ namespace MaterialModel
 
          // ... Set SelectedItem as Window Title.
          string value = comboBox.SelectedItem as string;
-         _currentElasaticModel = value;
+         m_selectionElasticModel.CurrentSelection = value;
          this.Title = "Selected: " + value;
       }
 
       private void ComboBoxElasticModel_Reset(ComboBox comboBox)
       {
-         if (comboBox != null)
+         if (m_selectionElasticModel != null)
          {
-            comboBox.SelectedIndex = 0;
-            _currentElasaticModel = SelectionElastic.ElasticModelDefault;
+            m_selectionElasticModel.Clear();
          }
       }
 
