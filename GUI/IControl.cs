@@ -4,10 +4,10 @@ using System.Text;
 
 namespace MaterialModel.GUI
 {
-  public interface ISelection
+  public interface IControl
    {
-      ISelection Previous { get; }
-      ISelection Next { get; }
+      IControl Previous { get; }
+      IControl Next { get; }
       void Clear();
 
       void Init();

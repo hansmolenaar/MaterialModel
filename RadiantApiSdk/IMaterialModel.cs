@@ -13,6 +13,5 @@ namespace MaterialModel.RadiantApiSdk
       TopologicalSupport Support { get; }
       IEnumerable<IMaterialModelProperty> Elastic { get; }
       IEnumerable<IMaterialModelProperty> Inelastic { get; }
-      IEnumerable<IMaterialModelProperty> Temperature { get; }
    }
 }

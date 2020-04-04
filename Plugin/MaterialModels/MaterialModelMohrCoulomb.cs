@@ -27,6 +27,5 @@ namespace MaterialModel.Plugin
       public string DisplayName { get { return "Mohr-Coulomb"; } }
       public IEnumerable<IMaterialModelProperty> Elastic { get { return m_elasticModel.Elastic.Where(mp => !mp.Categories.Contains(MaterialModelLinearElastic.TranseverseIsotropic)); } }
       public IEnumerable<IMaterialModelProperty> Inelastic { get { return m_components; } }
-      public IEnumerable<IMaterialModelProperty> Temperature { get { return Enumerable.Empty<IMaterialModelProperty>(); } }
    }
 }

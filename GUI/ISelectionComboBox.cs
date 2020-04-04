@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public interface ISelectionComboBox : ISelection
+   public interface ISelectionComboBox : IControl
    {
       ComboBox MyComboBox { get; }
 

@@ -6,7 +6,7 @@ namespace MaterialModel.GUI
 {
   public static class ISelectionRangeExtensions
    {
-      public static void ClearTail(this ISelection selection)
+      public static void ClearTail(this IControl selection)
       {
          var nxt = selection.Next;
          while ( nxt != null)

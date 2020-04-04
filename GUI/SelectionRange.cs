@@ -13,7 +13,7 @@ namespace MaterialModel.GUI
 
       private AskMeAnything m_askMeAnything { get; }
 
-      public SelectionRange(ComboBox comboBox,AskMeAnything ame, ISelection prev)
+      public SelectionRange(ComboBox comboBox,AskMeAnything ame, IControl prev)
       {
          m_askMeAnything = ame;
          MyComboBox = comboBox;
@@ -21,13 +21,13 @@ namespace MaterialModel.GUI
          Clear();
       }
 
-      public void SetNext(ISelection nxt)
+      public void SetNext(IControl nxt)
       {
          Next = nxt;
       }
 
-      public ISelection Previous { get; }
-      public ISelection Next { get; private set; }
+      public IControl Previous { get; }
+      public IControl Next { get; private set; }
 
       public void Clear()
       {

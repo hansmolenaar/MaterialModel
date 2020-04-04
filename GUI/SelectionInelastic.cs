@@ -9,11 +9,12 @@ namespace MaterialModel.GUI
    public class SelectionInelastic : ISelectionComboBox
    {
       public const string InelasticModelDefault = "-- Select Inelastic Components --";
+      public const string NoInelasticModel = "None";
       public ComboBox MyComboBox { get; }
 
       private AskMeAnything m_askMeAnything { get; }
 
-      public SelectionInelastic(ComboBox comboBox, AskMeAnything ame, ISelection prev)
+      public SelectionInelastic(ComboBox comboBox, AskMeAnything ame, IControl prev)
       {
          m_askMeAnything = ame;
          MyComboBox = comboBox;
@@ -21,13 +22,13 @@ namespace MaterialModel.GUI
          Clear();
       }
 
-      public void SetNext(ISelection nxt)
+      public void SetNext(IControl nxt)
       {
          Next = nxt;
       }
 
-      public ISelection Previous { get; }
-      public ISelection Next { get; private set; }
+      public IControl Previous { get; }
+      public IControl Next { get; private set; }
 
       public void Clear()
       {
@@ -47,6 +48,10 @@ namespace MaterialModel.GUI
          if ( matSelected.Any())
          {
             choices.AddRange(matSelected.Single().Inelastic.SelectMany(p => p.Categories).Distinct());
+            if ( choices.Count == 1)
+            {
+               choices.Add(NoInelasticModel);
+            }
          }
          MyComboBox.ItemsSource = choices;
 

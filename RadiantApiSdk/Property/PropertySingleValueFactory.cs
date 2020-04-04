@@ -175,5 +175,10 @@ namespace MaterialModel.RadiantApiSdk.Property
          return new SingleValueImpl("Cohesion", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
       }
 
+      public static IPropertySingleValue CreateThermalExpansion()
+      {
+         return new SingleValueImpl("Linear Thermal Expansion", QuantityFactory.ThermalExpansion, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+      }
+
    }
 }

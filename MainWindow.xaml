@@ -49,8 +49,8 @@
 
       <TextBlock HorizontalAlignment="Left" Height="30" Margin="341,34,0,0" Text="Formation" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
       <TextBlock HorizontalAlignment="Left" Height="19" Margin="341,85,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
-      <TextBlock HorizontalAlignment="Left" Height="18" Margin="504,144,0,0" Text="Elastic Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
-      <TextBlock HorizontalAlignment="Left" Height="20" Margin="504,204,0,0" Text="Inelastic Components" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+      <TextBlock HorizontalAlignment="Left" Height="18" Margin="504,144,0,0" Text="Elastic Beehavior" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+      <TextBlock HorizontalAlignment="Left" Height="20" Margin="504,204,0,0" Text="Inelastic Behavior" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
       
       <DataGrid 
          Name="Properties" 
