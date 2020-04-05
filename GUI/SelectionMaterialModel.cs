@@ -11,11 +11,11 @@ namespace MaterialModel.GUI
       public const string MaterialModelDefault = "-- Select Material Model --";
       public ComboBox MyComboBox { get; }
 
-      private AskMeAnything m_askMeAnything { get; }
+      public AskMeAnything MyAskMeAnything { get; }
 
       public SelectionMaterialModel(ComboBox comboBox, AskMeAnything ame, IControl prev)
       {
-         m_askMeAnything = ame;
+         MyAskMeAnything = ame;
          MyComboBox = comboBox;
          Previous = prev;
          Clear();
@@ -38,7 +38,7 @@ namespace MaterialModel.GUI
       public void Init()
       {
          // ... Assign the ItemsSource to the List.
-         MyComboBox.ItemsSource = new string[] { SelectionMaterialModel.MaterialModelDefault }.Concat(m_askMeAnything.MaterialModels);
+         MyComboBox.ItemsSource = new string[] { SelectionMaterialModel.MaterialModelDefault }.Concat(MyAskMeAnything.MaterialModels);
 
          // ... Make the first item selected.
          MyComboBox.SelectedIndex = 0;

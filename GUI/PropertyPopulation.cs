@@ -12,11 +12,11 @@ namespace MaterialModel.GUI
       public const string ElasticModelDefault = "-- Select Elastic Model --";
 
       public DataGrid MyDataGrid { get; }
-      private AskMeAnything m_askMeAnything { get; }
+      public AskMeAnything MyAskMeAnything { get; }
 
       public PropertyPopulation(DataGrid dataGridProperties, AskMeAnything ame, IControl prev)
       {
-         m_askMeAnything = ame;
+         MyAskMeAnything = ame;
          MyDataGrid = dataGridProperties;
          Previous = prev;
          Clear();
@@ -39,13 +39,13 @@ namespace MaterialModel.GUI
       public void Init()
       {
          IMaterialModel materialModel;
-         if (m_askMeAnything.AskPlugin.TryGetMaterialModel((Previous.Previous.Previous as SelectionMaterialModel).CurrentSelection, out materialModel))
+         if (this.TryGetMaterialModel(out materialModel))
          {
             var gprops = Enumerable.Empty<IMaterialModelProperty>();
             ICellCollection cellCollection;
-            if (m_askMeAnything.TryGetCellCollection((Previous.Previous.Previous.Previous as SelectionRange).CurrentSelection, out cellCollection))
+            if (this.TryGetCellCollection(out cellCollection))
             {
-               gprops = m_askMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Support);
+               gprops = MyAskMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Support);
             }
             var eCategory = (Previous.Previous as SelectionElastic).CurrentSelection;
             var eProps = materialModel.Elastic.Where(p => p.Categories.Contains(eCategory) || !p.Categories.Any()).ToArray();

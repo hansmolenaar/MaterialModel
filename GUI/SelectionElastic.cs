@@ -1,4 +1,5 @@
 ﻿using MaterialModel.ClientFacing;
+using MaterialModel.RadiantApiSdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace MaterialModel.GUI
       public const string ElasticModelDefault = "-- Select Elastic Model --";
       public ComboBox MyComboBox { get; }
 
-      private AskMeAnything m_askMeAnything { get; }
+      public AskMeAnything MyAskMeAnything { get; }
 
       public SelectionElastic(ComboBox comboBox, AskMeAnything ame, IControl prev)
       {
-         m_askMeAnything = ame;
+         MyAskMeAnything = ame;
          MyComboBox = comboBox;
          Previous = prev;
          Clear();
@@ -39,8 +40,15 @@ namespace MaterialModel.GUI
 
       public void Init()
       {
-         var matmod = Previous as SelectionMaterialModel;
-         MyComboBox.ItemsSource = new string[] { SelectionElastic.ElasticModelDefault }.Concat(m_askMeAnything.GetAvailableElasticModels(matmod.CurrentSelection));
+         var elasticBehaviors = new List<string>();
+         elasticBehaviors.Add(ElasticModelDefault);
+
+         IMaterialModel materialModel;
+         if (this.TryGetMaterialModel(out materialModel))
+         {
+            elasticBehaviors.AddRange(MyAskMeAnything.GetAvailableElasticModels(materialModel.DisplayName));
+         }
+         MyComboBox.ItemsSource = elasticBehaviors;
 
          // ... Make the first item selected.
          MyComboBox.SelectedIndex = 0;

@@ -11,11 +11,11 @@ namespace MaterialModel.GUI
       public const string RangeDefault = "-- Select Formation--";
       public ComboBox MyComboBox { get; }
 
-      private AskMeAnything m_askMeAnything { get; }
+      public AskMeAnything MyAskMeAnything { get; }
 
       public SelectionRange(ComboBox comboBox,AskMeAnything ame, IControl prev)
       {
-         m_askMeAnything = ame;
+         MyAskMeAnything = ame;
          MyComboBox = comboBox;
          Previous = prev;
          Clear();
@@ -38,7 +38,7 @@ namespace MaterialModel.GUI
       public void Init()
       {
          // ... Assign the ItemsSource to the List.
-         MyComboBox.ItemsSource = new string[] { SelectionRange.RangeDefault }.Concat(m_askMeAnything.Formations);
+         MyComboBox.ItemsSource = new string[] { SelectionRange.RangeDefault }.Concat(MyAskMeAnything.Formations);
 
          // ... Make the first item selected.
          MyComboBox.SelectedIndex = 0;

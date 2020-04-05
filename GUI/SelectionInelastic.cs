@@ -1,4 +1,5 @@
 ﻿using MaterialModel.ClientFacing;
+using MaterialModel.RadiantApiSdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,11 @@ namespace MaterialModel.GUI
       public const string NoInelasticModel = "None";
       public ComboBox MyComboBox { get; }
 
-      private AskMeAnything m_askMeAnything { get; }
+      public AskMeAnything MyAskMeAnything { get; }
 
       public SelectionInelastic(ComboBox comboBox, AskMeAnything ame, IControl prev)
       {
-         m_askMeAnything = ame;
+         MyAskMeAnything = ame;
          MyComboBox = comboBox;
          Previous = prev;
          Clear();
@@ -42,12 +43,11 @@ namespace MaterialModel.GUI
       {
          var choices = new List<string>();
          choices.Add(InelasticModelDefault);
-         var matmodName = ((SelectionMaterialModel)Previous.Previous).CurrentSelection;
-
-         var matSelected = m_askMeAnything.AvailableMaterialModel.Where(m => m.DisplayName == matmodName).ToArray();
-         if ( matSelected.Any())
+         IMaterialModel materialModel;
+        
+         if ( this.TryGetMaterialModel(out materialModel))
          {
-            choices.AddRange(matSelected.Single().Inelastic.SelectMany(p => p.Categories).Distinct());
+            choices.AddRange(materialModel.Inelastic.SelectMany(p => p.Categories).Distinct());
             if ( choices.Count == 1)
             {
                choices.Add(NoInelasticModel);
