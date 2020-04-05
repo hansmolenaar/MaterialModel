@@ -6,18 +6,15 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionRange : ISelectionComboBox
+   public class SelectionRange : ControlBase, IControlListBox
    {
-      public const string RangeDefault = "-- Select Formation--";
-      public ComboBox MyComboBox { get; }
+      public const string RangeDefault = "-- Select Formations--";
+      public ListBox MyListBox { get; }
 
-      public AskMeAnything MyAskMeAnything { get; }
 
-      public SelectionRange(ComboBox comboBox,AskMeAnything ame, IControl prev)
+      public SelectionRange(ListBox listBox, AskMeAnything ame, IControl prev) : base(ame, prev)
       {
-         MyAskMeAnything = ame;
-         MyComboBox = comboBox;
-         Previous = prev;
+         MyListBox = listBox;
          Clear();
       }
 
@@ -26,24 +23,17 @@ namespace MaterialModel.GUI
          Next = nxt;
       }
 
-      public IControl Previous { get; }
-      public IControl Next { get; private set; }
-
-      public void Clear()
+      public override void Clear()
       {
-         MyComboBox.SelectedIndex = 0;
-         CurrentSelection = RangeDefault;
+         MyListBox.ItemsSource = null;
       }
 
-      public void Init()
+      public override void Init()
       {
          // ... Assign the ItemsSource to the List.
-         MyComboBox.ItemsSource = new string[] { SelectionRange.RangeDefault }.Concat(MyAskMeAnything.Formations);
-
-         // ... Make the first item selected.
-         MyComboBox.SelectedIndex = 0;
+         MyListBox.ItemsSource = MyAskMeAnything.Formations.ToArray();
       }
 
-      public string CurrentSelection { get; set; }
+      public IEnumerable<string> CurrentSelection { get; set; }
    }
 }

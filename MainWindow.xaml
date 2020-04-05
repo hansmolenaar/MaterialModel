@@ -63,6 +63,15 @@
          Margin="80,264,0,0" 
          VerticalAlignment="Top" 
          Width="402"/>
+      <ListBox 
+         HorizontalAlignment="Left" 
+         Height="93" 
+         Margin="441,30,0,0" 
+         Name="MyListBox" 
+         SelectionChanged="MyListBox_SelectionChanged"
+         SelectionMode="Extended"
+         VerticalAlignment="Top" 
+         Width="319"/>
 
 
    </Grid>

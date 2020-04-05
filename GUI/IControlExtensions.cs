@@ -1,7 +1,7 @@
 ﻿using MaterialModel.RadiantApiSdk;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace MaterialModel.GUI
 {
@@ -35,7 +35,8 @@ namespace MaterialModel.GUI
          var selectRange = (SelectionRange)control.FindControl(c => c is SelectionRange);
          if (selectRange != null)
          {
-            return control.MyAskMeAnything.TryGetCellCollection((selectRange).CurrentSelection, out cellCollection);
+            // will crash on multiple selections
+            return control.MyAskMeAnything.TryGetCellCollection((selectRange).CurrentSelection.Single(), out cellCollection);
          }
 
          cellCollection = null;

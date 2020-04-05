@@ -37,22 +37,39 @@ namespace MaterialModel
       {
 
          // ... Get the ComboBox reference.
-         var comboBox = sender as ComboBox;
+         var listBox = sender as ListBox;
          if (m_selectionRange == null)
          {
-            m_selectionRange = new SelectionRange(comboBox, m_askMeAnything, null);
+            m_selectionRange = new SelectionRange(listBox, m_askMeAnything, null);
             m_selectionRange.Init();
          }
-         m_selectionRange.CheckComboBox(comboBox);
+        // m_selectionRange.CheckComboBox(comboBox);
 
       }
 
       private void ComboBoxFormation_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         string value = m_selectionRange.SelectionChanged(sender, e);
-         this.Title = "Selected: " + value;
+         var values = m_selectionRange.SelectionChanged(sender, e).ToArray();
+         var title = "Selected: ";
+         foreach(var val in values)
+         {
+            title += (val + " ");
+         }
+         this.Title = title;
       }
 
+
+      private void MyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+      {
+         var listBox = sender as ListBox;
+         string msg = "";
+         foreach( var val in listBox.SelectedItems)
+         {
+            msg += (val + "  ");
+         }
+       
+        this.Title = "Selected: " + msg;
+      }
       #endregion
 
       #region MaterialModels
