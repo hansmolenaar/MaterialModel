@@ -7,18 +7,15 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class PropertyPopulation : IControl
+   public class PropertyPopulation : ControlBase
    {
       public const string ElasticModelDefault = "-- Select Elastic Model --";
 
       public DataGrid MyDataGrid { get; }
-      public AskMeAnything MyAskMeAnything { get; }
 
-      public PropertyPopulation(DataGrid dataGridProperties, AskMeAnything ame, IControl prev)
+      public PropertyPopulation(DataGrid dataGridProperties, AskMeAnything ame, IControl prev) : base(ame, prev)
       {
-         MyAskMeAnything = ame;
          MyDataGrid = dataGridProperties;
-         Previous = prev;
          Clear();
       }
 
@@ -27,16 +24,14 @@ namespace MaterialModel.GUI
          Next = nxt;
       }
 
-      public IControl Previous { get; }
-      public IControl Next { get; private set; }
 
-      public void Clear()
+      public override void Clear()
       {
          MyDataGrid.ItemsSource = null;
       }
 
 
-      public void Init()
+      public override void Init()
       {
          IMaterialModel materialModel;
          if (this.TryGetMaterialModel(out materialModel))

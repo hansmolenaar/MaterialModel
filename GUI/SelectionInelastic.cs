@@ -7,19 +7,16 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionInelastic : ISelectionComboBox
+   public class SelectionInelastic : ControlBase, ISelectionComboBox
    {
       public const string InelasticModelDefault = "-- Select Inelastic Components --";
       public const string NoInelasticModel = "None";
       public ComboBox MyComboBox { get; }
 
-      public AskMeAnything MyAskMeAnything { get; }
 
-      public SelectionInelastic(ComboBox comboBox, AskMeAnything ame, IControl prev)
+      public SelectionInelastic(ComboBox comboBox, AskMeAnything ame, IControl prev) : base(ame, prev)
       {
-         MyAskMeAnything = ame;
          MyComboBox = comboBox;
-         Previous = prev;
          Clear();
       }
 
@@ -28,10 +25,7 @@ namespace MaterialModel.GUI
          Next = nxt;
       }
 
-      public IControl Previous { get; }
-      public IControl Next { get; private set; }
-
-      public void Clear()
+      public override void Clear()
       {
          MyComboBox.SelectedIndex = 0;
          CurrentSelection = InelasticModelDefault;
@@ -39,7 +33,7 @@ namespace MaterialModel.GUI
 
       public string CurrentSelection { get; set; }
 
-      public void Init()
+      public override void Init()
       {
          var choices = new List<string>();
          choices.Add(InelasticModelDefault);

@@ -7,18 +7,15 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionElastic : ISelectionComboBox
+   public class SelectionElastic :ControlBase, ISelectionComboBox
    {
       public const string ElasticModelDefault = "-- Select Elastic Model --";
       public ComboBox MyComboBox { get; }
 
-      public AskMeAnything MyAskMeAnything { get; }
 
-      public SelectionElastic(ComboBox comboBox, AskMeAnything ame, IControl prev)
+      public SelectionElastic(ComboBox comboBox, AskMeAnything ame, IControl prev) : base(ame, prev)
       {
-         MyAskMeAnything = ame;
          MyComboBox = comboBox;
-         Previous = prev;
          Clear();
       }
 
@@ -27,10 +24,8 @@ namespace MaterialModel.GUI
          Next = nxt;
       }
 
-      public IControl Previous { get; }
-      public IControl Next { get; private set; }
 
-      public void Clear()
+      public override void Clear()
       {
          MyComboBox.SelectedIndex = 0;
          CurrentSelection = ElasticModelDefault;
@@ -38,7 +33,7 @@ namespace MaterialModel.GUI
 
       public string CurrentSelection { get; set; }
 
-      public void Init()
+      public override void Init()
       {
          var elasticBehaviors = new List<string>();
          elasticBehaviors.Add(ElasticModelDefault);

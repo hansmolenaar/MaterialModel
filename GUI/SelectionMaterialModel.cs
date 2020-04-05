@@ -6,18 +6,14 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionMaterialModel : ISelectionComboBox
+   public class SelectionMaterialModel :ControlBase, ISelectionComboBox
    {
       public const string MaterialModelDefault = "-- Select Material Model --";
       public ComboBox MyComboBox { get; }
 
-      public AskMeAnything MyAskMeAnything { get; }
-
-      public SelectionMaterialModel(ComboBox comboBox, AskMeAnything ame, IControl prev)
+      public SelectionMaterialModel(ComboBox comboBox, AskMeAnything ame, IControl prev) : base(ame, prev)
       {
-         MyAskMeAnything = ame;
          MyComboBox = comboBox;
-         Previous = prev;
          Clear();
       }
 
@@ -26,16 +22,14 @@ namespace MaterialModel.GUI
          Next = nxt;
       }
 
-      public IControl Previous { get; }
-      public IControl Next { get; private set; }
 
-      public void Clear()
+      public override void Clear()
       {
          MyComboBox.SelectedIndex = 0;
          CurrentSelection = MaterialModelDefault;
       }
 
-      public void Init()
+      public override void Init()
       {
          // ... Assign the ItemsSource to the List.
          MyComboBox.ItemsSource = new string[] { SelectionMaterialModel.MaterialModelDefault }.Concat(MyAskMeAnything.MaterialModels);

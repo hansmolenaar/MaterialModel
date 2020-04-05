@@ -8,50 +8,40 @@ namespace MaterialModel.GUI
    public static class IControlExtensions
    {
 
-      public static bool TryGetMaterialModel( this IControl control, out IMaterialModel materialModel)
-      {
-         SelectionMaterialModel selectMatMod = control as SelectionMaterialModel;
-         while (control != null && selectMatMod == null)
-         {
-            control = control.Previous;
-            selectMatMod = control as SelectionMaterialModel;
-         }
 
-        
-         if ( selectMatMod != null)
+      private static IControl FindControl(this IControl currentControl, Predicate<IControl> accept)
+      {
+         while (currentControl != null && !accept(currentControl))
          {
-           return selectMatMod.MyAskMeAnything.AskPlugin.TryGetMaterialModel(selectMatMod.CurrentSelection, out materialModel);
+            currentControl = currentControl.Previous;
          }
-         else
-         {
-            materialModel = null;
-            return false;
-         }
-         
+         return currentControl;
       }
 
-      public static bool TryGetCellCollection(this IControl control , out ICellCollection cellCollection)
+      public static bool TryGetMaterialModel(this IControl control, out IMaterialModel materialModel)
       {
-         SelectionRange selectRange = control as SelectionRange;
-         while (control != null && selectRange == null)
+         var selectMatMod = (SelectionMaterialModel)control.FindControl(c => c is SelectionMaterialModel);
+         if (selectMatMod != null)
          {
-            control = control.Previous;
-            selectRange = control as SelectionRange;
+            return selectMatMod.MyAskMeAnything.AskPlugin.TryGetMaterialModel(selectMatMod.CurrentSelection, out materialModel);
          }
 
+         materialModel = null;
+         return false;
+      }
 
+      public static bool TryGetCellCollection(this IControl control, out ICellCollection cellCollection)
+      {
+         var selectRange = (SelectionRange)control.FindControl(c => c is SelectionRange);
          if (selectRange != null)
          {
-            return  control. MyAskMeAnything.TryGetCellCollection((selectRange).CurrentSelection, out cellCollection);
-         }
-         else
-         {
-            cellCollection = null;
-            return false;
+            return control.MyAskMeAnything.TryGetCellCollection((selectRange).CurrentSelection, out cellCollection);
          }
 
+         cellCollection = null;
+         return false;
       }
 
-           
+
    }
 }
