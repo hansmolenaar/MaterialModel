@@ -12,7 +12,7 @@ namespace MaterialModel.GUI
 
       public override void Clear()
       {
-         MyListBox.ItemsSource = null;
+         MyListBox.ItemsSource = new string[0];
       }
 
       public IEnumerable<string> CurrentSelection { get; set; }

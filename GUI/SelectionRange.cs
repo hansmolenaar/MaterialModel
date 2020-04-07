@@ -17,11 +17,6 @@ namespace MaterialModel.GUI
          Clear();
       }
 
-      public void SetNext(IControl nxt)
-      {
-         Next = nxt;
-      }
-
       public override void Init()
       {
          // ... Assign the ItemsSource to the List.

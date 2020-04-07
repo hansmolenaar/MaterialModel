@@ -50,7 +50,6 @@ namespace MaterialModel
 
       private void SelectionFormation_Changed(object sender, SelectionChangedEventArgs e)
       {
-         var listBox = sender as ListBox;
          m_selectionRange.SelectionChanged(sender, e);
          string msg = "";
          foreach( var val in m_selectionRange.CurrentSelection)
@@ -106,9 +105,13 @@ namespace MaterialModel
 
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         // ... Set SelectedItem as Window Title.
-         string value = m_selectionElasticModel.SelectionChanged(sender, e).Single();
-         this.Title = "Selected: " + value;
+         m_selectionElasticModel.SelectionChanged(sender, e);
+         string msg = "";
+         foreach (var val in m_selectionElasticModel.CurrentSelection)
+         {
+            msg += (val + "  ");
+         }
+         this.Title = "Selected: " + msg;
       }
 
       #endregion

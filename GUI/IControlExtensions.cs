@@ -30,14 +30,13 @@ namespace MaterialModel.GUI
          return false;
       }
 
-      public static bool TryGetCellCollection(this IControl control, out IReadOnlyList< ICellCollection> cellCollection)
+      public static bool TryGetCellCollection(this IControl control, out IReadOnlyList<ICellCollection> cellCollection)
       {
          var selectRange = (SelectionRange)control.FindControl(c => c is SelectionRange);
          if (selectRange != null)
          {
-            // will crash on multiple selections
             var result = new List<ICellCollection>();
-            foreach(var ccName in selectRange.CurrentSelection)
+            foreach (var ccName in selectRange.CurrentSelection)
             {
                ICellCollection cc;
                if (control.MyAskMeAnything.TryGetCellCollection(ccName, out cc))
@@ -53,6 +52,18 @@ namespace MaterialModel.GUI
          return false;
       }
 
+      public static bool TryGetElasticBehaviors(this IControl control, out IReadOnlyList<string> elasticBehaviors)
+      {
+         var selectElastic = (SelectionElastic)control.FindControl(c => c is SelectionElastic);
+         if (selectElastic != null)
+         {
+            elasticBehaviors = selectElastic.CurrentSelection.ToArray();         
+            return elasticBehaviors.Any();
+         }
+
+         elasticBehaviors = null;
+         return false;
+      }
 
    }
 }

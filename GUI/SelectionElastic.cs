@@ -18,16 +18,9 @@ namespace MaterialModel.GUI
          Clear();
       }
 
-      public void SetNext(IControl nxt)
-      {
-         Next = nxt;
-      }
-
       public override void Init()
       {
          var elasticBehaviors = new List<string>();
-         elasticBehaviors.Add(ElasticModelDefault);
-
          IMaterialModel materialModel;
          if (this.TryGetMaterialModel(out materialModel))
          {

@@ -19,11 +19,6 @@ namespace MaterialModel.GUI
          Clear();
       }
 
-      public void SetNext(IControl nxt)
-      {
-         Next = nxt;
-      }
-
 
       public override void Clear()
       {
@@ -33,6 +28,8 @@ namespace MaterialModel.GUI
 
       public override void Init()
       {
+         Clear();
+
          IMaterialModel materialModel;
          if (this.TryGetMaterialModel(out materialModel))
          {
@@ -42,7 +39,12 @@ namespace MaterialModel.GUI
             {
                gprops = MyAskMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Select(cc => cc.Support).Distinct().Single());
             }
-            var eCategory = (Previous.Previous as SelectionElastic).CurrentSelection.Single();
+            IReadOnlyList<string> elasticBehaviors;
+            if (!this.TryGetElasticBehaviors(out elasticBehaviors))
+            {
+               return;
+            }
+            var eCategory = elasticBehaviors.Single();
             var eProps = materialModel.Elastic.Where(p => p.Categories.Contains(eCategory) || !p.Categories.Any()).ToArray();
             var iCategory = (Previous as SelectionInelastic).CurrentSelection;
             var iprops = materialModel.Inelastic.Where(p => p.Categories.Contains(iCategory) || !p.Categories.Any()).ToArray();
@@ -58,10 +60,7 @@ namespace MaterialModel.GUI
             }
             MyDataGrid.ItemsSource = props;
          }
-         else
-         {
-            MyDataGrid.ItemsSource = null;
-         }
+
       }
    }
 }
