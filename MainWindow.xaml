@@ -31,6 +31,7 @@
           Name="ElasticModel" 
           Loaded="ComboBoxElasticModel_Loaded" 
          SelectionChanged="ComboBoxElasticModel_SelectionChanged"
+         SelectionMode="Extended"
          Height="80" 
          Margin="126,262,0,0" 
          VerticalAlignment="Top" 

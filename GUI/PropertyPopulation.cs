@@ -44,8 +44,8 @@ namespace MaterialModel.GUI
             {
                return;
             }
-            var eCategory = elasticBehaviors.Single();
-            var eProps = materialModel.Elastic.Where(p => p.Categories.Contains(eCategory) || !p.Categories.Any()).ToArray();
+
+            var eProps = materialModel.Elastic.Where(p => p.Categories.Any(pc => elasticBehaviors.Contains(pc)) || !p.Categories.Any()).ToArray();
             var iCategory = (Previous as SelectionInelastic).GetSelection(); ;
             var iprops = materialModel.Inelastic.Where(p => p.Categories.Contains(iCategory) || !p.Categories.Any()).ToArray();
             var uniquePropName = new HashSet<string>();
