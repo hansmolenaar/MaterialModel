@@ -37,10 +37,10 @@ namespace MaterialModel.GUI
          if (this.TryGetMaterialModel(out materialModel))
          {
             var gprops = Enumerable.Empty<IMaterialModelProperty>();
-            ICellCollection cellCollection;
+            IReadOnlyList<ICellCollection> cellCollection;
             if (this.TryGetCellCollection(out cellCollection))
             {
-               gprops = MyAskMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Support);
+               gprops = MyAskMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Select(cc => cc.Support).Distinct().Single());
             }
             var eCategory = (Previous.Previous as SelectionElastic).CurrentSelection;
             var eProps = materialModel.Elastic.Where(p => p.Categories.Contains(eCategory) || !p.Categories.Any()).ToArray();

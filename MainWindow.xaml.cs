@@ -33,7 +33,7 @@ namespace MaterialModel
 
       #region Formations
 
-      private void ComboBoxFormation_Loaded(object sender, RoutedEventArgs e)
+      private void ListBoxFormation_Loaded(object sender, RoutedEventArgs e)
       {
 
          // ... Get the ComboBox reference.
@@ -47,23 +47,13 @@ namespace MaterialModel
 
       }
 
-      private void ComboBoxFormation_SelectionChanged(object sender, SelectionChangedEventArgs e)
-      {
-         var values = m_selectionRange.SelectionChanged(sender, e).ToArray();
-         var title = "Selected: ";
-         foreach(var val in values)
-         {
-            title += (val + " ");
-         }
-         this.Title = title;
-      }
 
-
-      private void MyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+      private void ListBoxFormation_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          var listBox = sender as ListBox;
+         m_selectionRange.SelectionChanged(sender, e);
          string msg = "";
-         foreach( var val in listBox.SelectedItems)
+         foreach( var val in m_selectionRange.CurrentSelection)
          {
             msg += (val + "  ");
          }

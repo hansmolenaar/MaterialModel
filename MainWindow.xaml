@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
    <Grid>
-      <ComboBox 
-         Name="Formation" 
+      <ListBox 
          HorizontalAlignment="Left" 
-         Height="30" 
-         Margin="80,34,0,0" 
+         Height="34" 
+         Margin="80,30,0,0" 
+         Name="MyListBox"
+         Loaded="ListBoxFormation_Loaded" 
+         SelectionChanged="ListBoxFormation_SelectionChanged"
+         SelectionMode="Extended"
          VerticalAlignment="Top" 
-         Width="237"
-         Loaded="ComboBoxFormation_Loaded" 
-         Text="Formation"
-         SelectionChanged="ComboBoxFormation_SelectionChanged" />
+         Width="237"/>
       <ComboBox 
          Name="MaterialModel" 
          HorizontalAlignment="Left" 
@@ -51,7 +51,7 @@
       <TextBlock HorizontalAlignment="Left" Height="19" Margin="341,85,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
       <TextBlock HorizontalAlignment="Left" Height="18" Margin="504,144,0,0" Text="Elastic Beehavior" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
       <TextBlock HorizontalAlignment="Left" Height="20" Margin="504,204,0,0" Text="Inelastic Behavior" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-      
+
       <DataGrid 
          Name="Properties" 
          Loaded="MaterialProperties_Loaded"  
@@ -63,15 +63,7 @@
          Margin="80,264,0,0" 
          VerticalAlignment="Top" 
          Width="402"/>
-      <ListBox 
-         HorizontalAlignment="Left" 
-         Height="93" 
-         Margin="441,30,0,0" 
-         Name="MyListBox" 
-         SelectionChanged="MyListBox_SelectionChanged"
-         SelectionMode="Extended"
-         VerticalAlignment="Top" 
-         Width="319"/>
+
 
 
    </Grid>

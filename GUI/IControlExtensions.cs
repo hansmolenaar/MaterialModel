@@ -30,13 +30,23 @@ namespace MaterialModel.GUI
          return false;
       }
 
-      public static bool TryGetCellCollection(this IControl control, out ICellCollection cellCollection)
+      public static bool TryGetCellCollection(this IControl control, out IReadOnlyList< ICellCollection> cellCollection)
       {
          var selectRange = (SelectionRange)control.FindControl(c => c is SelectionRange);
          if (selectRange != null)
          {
             // will crash on multiple selections
-            return control.MyAskMeAnything.TryGetCellCollection((selectRange).CurrentSelection.Single(), out cellCollection);
+            var result = new List<ICellCollection>();
+            foreach(var ccName in selectRange.CurrentSelection)
+            {
+               ICellCollection cc;
+               if (control.MyAskMeAnything.TryGetCellCollection(ccName, out cc))
+               {
+                  result.Add(cc);
+               }
+            }
+            cellCollection = result;
+            return cellCollection.Any();
          }
 
          cellCollection = null;

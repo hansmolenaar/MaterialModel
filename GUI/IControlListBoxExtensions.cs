@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public static class ISelectionListBoxExtensions
+   public static class IControlListBoxExtensions
    {
-      public static IEnumerable<string> SelectionChanged(this IControlListBox selection, object sender, SelectionChangedEventArgs e)
+      public static IReadOnlyList<string> SelectionChanged(this IControlListBox selection, object sender, SelectionChangedEventArgs e)
       {
          // ... Get the ComboBox.
          var listBox = (ListBox)sender;
          selection.CheckListBox(listBox);
 
-         var values = new List<string>();
-         foreach (string val in listBox.SelectedItems)
+         // ... Set SelectedItem as Window Title.
+         var selectedItems = new List<string>();
+         foreach( string str in listBox.SelectedItems)
          {
-            values.Add(val);
+            selectedItems.Add(str);
          }
-         selection.CurrentSelection = values;
+         selection.CurrentSelection = selectedItems;
          selection.ClearTail();
-         return values;
+         return selectedItems;
       }
 
       public static void CheckListBox(this IControlListBox selection, ListBox lb)
