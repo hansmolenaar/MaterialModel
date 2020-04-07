@@ -33,7 +33,7 @@ namespace MaterialModel
 
       #region Formations
 
-      private void ListBoxFormation_Loaded(object sender, RoutedEventArgs e)
+      private void SelectFormation_Loaded(object sender, RoutedEventArgs e)
       {
 
          // ... Get the ComboBox reference.
@@ -48,7 +48,7 @@ namespace MaterialModel
       }
 
 
-      private void ListBoxFormation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+      private void SelectionFormation_Changed(object sender, SelectionChangedEventArgs e)
       {
          var listBox = sender as ListBox;
          m_selectionRange.SelectionChanged(sender, e);
@@ -94,20 +94,20 @@ namespace MaterialModel
       {
 
          // ... Get the ComboBox reference.
-         var comboBox = sender as ComboBox;
+         var listBox = sender as ListBox;
          if (m_selectionElasticModel == null)
          {
-            m_selectionElasticModel = new SelectionElastic(comboBox, m_askMeAnything, m_selectionMaterialModel);
+            m_selectionElasticModel = new SelectionElastic(listBox, m_askMeAnything, m_selectionMaterialModel);
             m_selectionMaterialModel.SetNext(m_selectionElasticModel);
          }
-         m_selectionElasticModel.CheckComboBox(comboBox);
+         m_selectionElasticModel.CheckListBox(listBox);
          m_selectionElasticModel.Init();
       }
 
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          // ... Set SelectedItem as Window Title.
-         string value = m_selectionElasticModel.SelectionChanged(sender, e);
+         string value = m_selectionElasticModel.SelectionChanged(sender, e).Single();
          this.Title = "Selected: " + value;
       }
 

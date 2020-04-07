@@ -6,10 +6,9 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionRange : ControlBase, IControlListBox
+   public class SelectionRange : ControlListBoxBase, IControlListBox
    {
       public const string RangeDefault = "-- Select Formations--";
-      public ListBox MyListBox { get; }
 
 
       public SelectionRange(ListBox listBox, AskMeAnything ame, IControl prev) : base(ame, prev)
@@ -23,17 +22,10 @@ namespace MaterialModel.GUI
          Next = nxt;
       }
 
-      public override void Clear()
-      {
-         MyListBox.ItemsSource = null;
-      }
-
       public override void Init()
       {
          // ... Assign the ItemsSource to the List.
          MyListBox.ItemsSource = MyAskMeAnything.Formations.ToArray();
       }
-
-      public IEnumerable<string> CurrentSelection { get; set; }
    }
 }

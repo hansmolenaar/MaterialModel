@@ -5,52 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaterialModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-   <Grid>
+        Title="MainWindow" Height="658" Width="800">
+   <Grid Margin="28,0,0,0" Height="785" VerticalAlignment="Top">
       <ListBox 
          HorizontalAlignment="Left" 
-         Height="34" 
+         Height="115" 
          Margin="80,30,0,0" 
          Name="MyListBox"
-         Loaded="ListBoxFormation_Loaded" 
-         SelectionChanged="ListBoxFormation_SelectionChanged"
+         Loaded="SelectFormation_Loaded" 
+         SelectionChanged="SelectionFormation_Changed"
          SelectionMode="Extended"
          VerticalAlignment="Top" 
          Width="237"/>
       <ComboBox 
          Name="MaterialModel" 
          HorizontalAlignment="Left" 
-         Height="38" Margin="80,85,0,0" 
+         Height="38" Margin="80,187,0,0" 
          VerticalAlignment="Top" 
          Width="237"
          Loaded="ComboBoxMaterialModel_Loaded" 
          Text="MaterialModel"
          SelectionChanged="ComboBoxMaterialModel_SelectionChanged"/>
-      <ComboBox 
-         Name="ElasticModel" 
+      <ListBox 
          HorizontalAlignment="Left" 
-         Margin="239,144,0,0" 
+          Name="ElasticModel" 
+          Loaded="ComboBoxElasticModel_Loaded" 
+         SelectionChanged="ComboBoxElasticModel_SelectionChanged"
+         Height="80" 
+         Margin="126,262,0,0" 
          VerticalAlignment="Top" 
-         Width="243" 
-         Height="39"
-         Loaded="ComboBoxElasticModel_Loaded" 
-         Text="ElasticModel"
-         SelectionChanged="ComboBoxElasticModel_SelectionChanged"/>
+         Width="237"/>
       <ComboBox 
          Name="Inelastic" 
          HorizontalAlignment="Left" 
-         Height="42" 
-         Margin="239,201,0,0" 
+         Height="80" 
+         Margin="412,262,0,0" 
          VerticalAlignment="Top" 
-         Width="243"
+         Width="249"
          Loaded="ComboBoxInelasticModel_Loaded" 
          Text="InelasticModel"
          SelectionChanged="ComboBoxInelasticModel_SelectionChanged"/>
 
       <TextBlock HorizontalAlignment="Left" Height="30" Margin="341,34,0,0" Text="Formation" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-      <TextBlock HorizontalAlignment="Left" Height="19" Margin="341,85,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
-      <TextBlock HorizontalAlignment="Left" Height="18" Margin="504,144,0,0" Text="Elastic Beehavior" TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
-      <TextBlock HorizontalAlignment="Left" Height="20" Margin="504,204,0,0" Text="Inelastic Behavior" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+      <TextBlock HorizontalAlignment="Left" Height="20" Margin="341,193,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
+      <TextBlock HorizontalAlignment="Left" Height="18" Margin="184,244,0,0" Text="Elastic Beehaviors" TextWrapping="Wrap" VerticalAlignment="Top" Width="122"/>
+      <TextBlock HorizontalAlignment="Left" Height="20" Margin="462,242,0,0" Text="Inelastic Behaviors" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
 
       <DataGrid 
          Name="Properties" 
@@ -60,9 +59,10 @@
          Grid.Row="0"
          HorizontalAlignment="Left" 
          Height="160" 
-         Margin="80,264,0,0" 
+         Margin="80,420,0,0" 
          VerticalAlignment="Top" 
          Width="402"/>
+
 
 
 

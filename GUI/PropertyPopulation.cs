@@ -42,7 +42,7 @@ namespace MaterialModel.GUI
             {
                gprops = MyAskMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Select(cc => cc.Support).Distinct().Single());
             }
-            var eCategory = (Previous.Previous as SelectionElastic).CurrentSelection;
+            var eCategory = (Previous.Previous as SelectionElastic).CurrentSelection.Single();
             var eProps = materialModel.Elastic.Where(p => p.Categories.Contains(eCategory) || !p.Categories.Any()).ToArray();
             var iCategory = (Previous as SelectionInelastic).CurrentSelection;
             var iprops = materialModel.Inelastic.Where(p => p.Categories.Contains(iCategory) || !p.Categories.Any()).ToArray();
