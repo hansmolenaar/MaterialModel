@@ -26,7 +26,7 @@ namespace MaterialModel.GUI
          CurrentSelection = InelasticModelDefault;
       }
 
-      public string CurrentSelection { get; set; }
+      public  string CurrentSelection { get; set; }
 
       public override void Init()
       {

@@ -8,6 +8,19 @@ namespace MaterialModel.GUI
    public static class IControlExtensions
    {
 
+      public static void ClearTail(this IControl selection)
+      {
+         var nxt = selection.Next;
+         while (nxt != null)
+         {
+            nxt.Clear();
+            nxt = nxt.Next;
+         }
+         if (selection.Next != null)
+         {
+            selection.Next.Init();
+         }
+      }
 
       private static IControl FindControl(this IControl currentControl, Predicate<IControl> accept)
       {

@@ -50,14 +50,7 @@ namespace MaterialModel
 
       private void SelectionFormation_Changed(object sender, SelectionChangedEventArgs e)
       {
-         m_selectionRange.SelectionChanged(sender, e);
-         string msg = "";
-         foreach( var val in m_selectionRange.CurrentSelection)
-         {
-            msg += (val + "  ");
-         }
-       
-        this.Title = "Selected: " + msg;
+         m_selectionRange.SelectionChanged(sender, e, this);
       }
       #endregion
 
@@ -105,13 +98,7 @@ namespace MaterialModel
 
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         m_selectionElasticModel.SelectionChanged(sender, e);
-         string msg = "";
-         foreach (var val in m_selectionElasticModel.CurrentSelection)
-         {
-            msg += (val + "  ");
-         }
-         this.Title = "Selected: " + msg;
+         m_selectionElasticModel.SelectionChanged(sender, e, this);
       }
 
       #endregion

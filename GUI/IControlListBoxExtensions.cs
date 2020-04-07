@@ -7,7 +7,7 @@ namespace MaterialModel.GUI
 {
    public static class IControlListBoxExtensions
    {
-      public static IReadOnlyList<string> SelectionChanged(this IControlListBox selection, object sender, SelectionChangedEventArgs e)
+      public static IReadOnlyList<string> SelectionChanged(this IControlListBox selection, object sender, SelectionChangedEventArgs e, MainWindow window)
       {
          // ... Get the ComboBox.
          var listBox = (ListBox)sender;
@@ -21,6 +21,17 @@ namespace MaterialModel.GUI
          }
          selection.CurrentSelection = selectedItems;
          selection.ClearTail();
+
+         // Echo choice
+         {
+            string msg = "";
+            foreach (var val in selectedItems)
+            {
+               msg += (val + "  ");
+            }
+            window.Title = "Selected: " + msg;
+         }
+
          return selectedItems;
       }
 
