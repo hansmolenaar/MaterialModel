@@ -12,16 +12,8 @@ namespace MaterialModel.GUI
          // ... Get the ComboBox.
          var listBox = (ListBox)sender;
          selection.CheckListBox(listBox);
-
-         // ... Set SelectedItem as Window Title.
-         var selectedItems = new List<string>();
-         foreach( string str in listBox.SelectedItems)
-         {
-            selectedItems.Add(str);
-         }
-         selection.CurrentSelection = selectedItems;
          selection.ClearTail();
-
+         var selectedItems = selection.GetSelections();
          // Echo choice
          {
             string msg = "";
@@ -41,6 +33,16 @@ namespace MaterialModel.GUI
          {
             throw new Exception("Unexpected list box");
          }
+      }
+
+      public static IReadOnlyList<string> GetSelections( this IControlListBox control)
+      {
+         var selectedItems = new List<string>();
+         foreach (string str in control.MyListBox.SelectedItems)
+         {
+            selectedItems.Add(str);
+         }
+         return selectedItems;
       }
    }
 }

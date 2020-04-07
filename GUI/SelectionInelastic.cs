@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionInelastic : ControlBase, ISelectionComboBox
+   public class SelectionInelastic : ControlBase, IControlComboBox
    {
       public const string InelasticModelDefault = "-- Select Inelastic Components --";
       public const string NoInelasticModel = "None";

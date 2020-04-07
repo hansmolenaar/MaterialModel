@@ -8,7 +8,5 @@ namespace MaterialModel.GUI
    public interface IControlListBox : IControl
    {
       ListBox MyListBox { get; }
-
-      IEnumerable<string> CurrentSelection { get;  set; }
    }
 }

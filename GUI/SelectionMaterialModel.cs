@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionMaterialModel :ControlBase, ISelectionComboBox
+   public class SelectionMaterialModel :ControlBase, IControlComboBox
    {
       public const string MaterialModelDefault = "-- Select Material Model --";
       public ComboBox MyComboBox { get; }
@@ -20,7 +20,7 @@ namespace MaterialModel.GUI
       public override void Clear()
       {
          MyComboBox.SelectedIndex = 0;
-         CurrentSelection = MaterialModelDefault;
+         MyComboBox.SelectedItem = MaterialModelDefault;
       }
 
       public override void Init()

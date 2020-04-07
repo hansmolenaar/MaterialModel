@@ -15,8 +15,6 @@ namespace MaterialModel.GUI
          MyListBox.ItemsSource = new string[0];
       }
 
-      public IEnumerable<string> CurrentSelection { get; set; }
-
       protected ControlListBoxBase(AskMeAnything ame, IControl prev) : base(ame, prev)
       {
       }

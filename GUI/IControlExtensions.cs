@@ -36,7 +36,7 @@ namespace MaterialModel.GUI
          var selectMatMod = (SelectionMaterialModel)control.FindControl(c => c is SelectionMaterialModel);
          if (selectMatMod != null)
          {
-            return selectMatMod.MyAskMeAnything.AskPlugin.TryGetMaterialModel(selectMatMod.CurrentSelection, out materialModel);
+            return selectMatMod.MyAskMeAnything.AskPlugin.TryGetMaterialModel(selectMatMod.GetSelection(), out materialModel);
          }
 
          materialModel = null;
@@ -49,7 +49,7 @@ namespace MaterialModel.GUI
          if (selectRange != null)
          {
             var result = new List<ICellCollection>();
-            foreach (var ccName in selectRange.CurrentSelection)
+            foreach (var ccName in selectRange.GetSelections())
             {
                ICellCollection cc;
                if (control.MyAskMeAnything.TryGetCellCollection(ccName, out cc))
@@ -70,7 +70,7 @@ namespace MaterialModel.GUI
          var selectElastic = (SelectionElastic)control.FindControl(c => c is SelectionElastic);
          if (selectElastic != null)
          {
-            elasticBehaviors = selectElastic.CurrentSelection.ToArray();         
+            elasticBehaviors = selectElastic.GetSelections();        
             return elasticBehaviors.Any();
          }
 

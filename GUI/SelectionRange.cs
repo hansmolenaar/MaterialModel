@@ -8,8 +8,6 @@ namespace MaterialModel.GUI
 {
    public class SelectionRange : ControlListBoxBase, IControlListBox
    {
-      public const string RangeDefault = "-- Select Formations--";
-
 
       public SelectionRange(ListBox listBox, AskMeAnything ame, IControl prev) : base(ame, prev)
       {

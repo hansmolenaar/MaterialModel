@@ -5,27 +5,28 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public static class ISelectionComboBoxExtensions
+   public static class IControlComboBoxExtensions
    {
-      public static string SelectionChanged(this ISelectionComboBox selection, object sender, SelectionChangedEventArgs e)
+      public static string SelectionChanged(this IControlComboBox selection, object sender, SelectionChangedEventArgs e)
       {
          // ... Get the ComboBox.
          var comboBox = (ComboBox)sender;
          selection.CheckComboBox(comboBox);
-
-         // ... Set SelectedItem as Window Title.
-         var value = comboBox.SelectedItem as string;
-         selection.CurrentSelection = value;
          selection.ClearTail();
-         return value;
+         return selection.GetSelection();
       }
 
-      public static void CheckComboBox(this ISelectionComboBox selection, ComboBox cb)
+      public static void CheckComboBox(this IControlComboBox selection, ComboBox cb)
       {
          if (cb != selection.MyComboBox)
          {
             throw new Exception("Unexpected combo box");
          }
+      }
+
+      public static string GetSelection(this IControlComboBox selection)
+      {
+         return selection.MyComboBox.SelectedItem as string;
       }
    }
 }

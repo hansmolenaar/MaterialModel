@@ -5,10 +5,8 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public interface ISelectionComboBox : IControl
+   public interface IControlComboBox : IControl
    {
       ComboBox MyComboBox { get; }
-
-      string CurrentSelection { get; set; }
    }
 }
