@@ -9,7 +9,7 @@ using MaterialModel.RadiantApiSdk;
 using MaterialModel.RadiantApiSdk.Property;
 
 namespace MaterialModel.Plugin
-{ 
+{
    public class MaterialModelMohrCoulomb : IMaterialModel
    {
       private MaterialModelLinearElastic m_elasticModel = new MaterialModelLinearElastic();
@@ -27,5 +27,11 @@ namespace MaterialModel.Plugin
       public string DisplayName { get { return "Mohr-Coulomb"; } }
       public IEnumerable<IMaterialModelProperty> Elastic { get { return m_elasticModel.Elastic.Where(mp => !mp.Categories.Contains(MaterialModelLinearElastic.TranseverseIsotropic)); } }
       public IEnumerable<IMaterialModelProperty> Inelastic { get { return m_components; } }
+
+      public bool AreElasticBehaviorsConsistent(IReadOnlyList<string> behaviors, out string errorMessage)
+      {
+         errorMessage = string.Empty;
+         return true;
+      }
    }
 }

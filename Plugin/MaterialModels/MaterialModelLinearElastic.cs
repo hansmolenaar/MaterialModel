@@ -29,7 +29,7 @@ namespace MaterialModel.Plugin
          new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " P"), TranseverseIsotropic),
          new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " PT"), TranseverseIsotropic),
          new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " TP"), TranseverseIsotropic),
-          new MaterialModelProperty(PropertySingleValueFactory.CreateThermalExpansion(), LinearThermalExpansion),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateThermalExpansion(), LinearThermalExpansion),
       };
 
       public string DisplayName { get { return "Linear Elastic"; } }
@@ -37,6 +37,22 @@ namespace MaterialModel.Plugin
       public TopologicalSupport Support { get { return TopologicalSupport.Volume; } }
       public IEnumerable<IMaterialModelProperty> Elastic { get { return m_components; } }
       public IEnumerable<IMaterialModelProperty> Inelastic { get { return Enumerable.Empty<IMaterialModelProperty>(); } }
+
+      public bool AreElasticBehaviorsConsistent(IReadOnlyList<string> behaviors, out string errorMessage)
+      {
+         errorMessage = string.Empty;
+         var baseBehaviors = behaviors.Where(b => b != LinearThermalExpansion).Distinct().ToArray();
+         if ( baseBehaviors.Count() != 1)
+         {
+            errorMessage = "Select one of:";
+            foreach( string cat in  m_components.SelectMany(c =>c.Categories).Distinct().Where(cc => cc != LinearThermalExpansion))
+            {
+               errorMessage = errorMessage + "  '" + cat + "'";
+            }
+            return false;
+         }
+         return true;
+      }
 
    }
 }

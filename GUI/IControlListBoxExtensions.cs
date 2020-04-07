@@ -14,6 +14,18 @@ namespace MaterialModel.GUI
          selection.CheckListBox(listBox);
          selection.ClearTail();
          var selectedItems = selection.GetSelections();
+
+         string errorMessage;
+         if ( !selection.CheckConsistentSelection(out errorMessage))
+         {
+            selection.Init();
+            selection.MyListBox.UnselectAll();
+
+            // Show error message
+            window.Title = errorMessage;
+            return new string[0];
+         }
+
          // Echo choice
          {
             string msg = "";

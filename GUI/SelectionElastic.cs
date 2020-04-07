@@ -18,6 +18,12 @@ namespace MaterialModel.GUI
          Clear();
       }
 
+      public override bool CheckConsistentSelection(out string errorMessage)
+      {
+         var materialModel = this.GetMaterialModelSafe();
+         return materialModel.AreElasticBehaviorsConsistent(this.GetSelections(), out errorMessage);
+      }
+
       public override void Init()
       {
          var elasticBehaviors = new List<string>();

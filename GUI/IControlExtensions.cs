@@ -43,6 +43,17 @@ namespace MaterialModel.GUI
          return false;
       }
 
+      public static IMaterialModel GetMaterialModelSafe(this IControl control)
+      {
+         IMaterialModel result;
+         if ( !control.TryGetMaterialModel(out result))
+         {
+            throw new Exception("Cannot find material model");
+         }
+         return result;
+      }
+
+
       public static bool TryGetCellCollection(this IControl control, out IReadOnlyList<ICellCollection> cellCollection)
       {
          var selectRange = (SelectionRange)control.FindControl(c => c is SelectionRange);

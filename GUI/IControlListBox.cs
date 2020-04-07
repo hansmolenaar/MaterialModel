@@ -8,5 +8,8 @@ namespace MaterialModel.GUI
    public interface IControlListBox : IControl
    {
       ListBox MyListBox { get; }
+
+      // Return succes
+      bool CheckConsistentSelection(out string errorMessage);
    }
 }

@@ -11,6 +11,7 @@ namespace MaterialModel.RadiantApiSdk
       string DisplayName { get; }
       TopologicalSupport Support { get; }
       IEnumerable<IMaterialModelProperty> Elastic { get; }
+      bool AreElasticBehaviorsConsistent(IReadOnlyList<string> behaviors, out string errorMessage);
       IEnumerable<IMaterialModelProperty> Inelastic { get; }
    }
 }
