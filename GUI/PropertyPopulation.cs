@@ -33,38 +33,36 @@ namespace MaterialModel.GUI
          IMaterialModel materialModel;
          if (this.TryGetMaterialModel(out materialModel))
          {
-            var gprops = Enumerable.Empty<IMaterialModelProperty>();
+            var allProps = new List<IMaterialModelProperty>();
             IReadOnlyList<ICellCollection> cellCollection;
             if (this.TryGetCellCollection(out cellCollection))
             {
-               gprops = MyAskMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Select(cc => cc.Support).Distinct().Single());
+               allProps.AddRange(MyAskMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Select(cc => cc.Support).Distinct().Single()));
             }
 
-            var eprops = new List<IMaterialModelProperty>();
             IReadOnlyList<string> elasticBehaviors;
             if (this.TryGetElasticBehaviors(out elasticBehaviors))
             {
-               eprops.AddRange(materialModel.Elastic.Where(p => p.Categories.Any(pc => elasticBehaviors.Contains(pc)) || !p.Categories.Any()));
+               allProps.AddRange(materialModel.Elastic.Where(p => p.Categories.Any(pc => elasticBehaviors.Contains(pc)) || !p.Categories.Any()));
             }
             else
             {
-               eprops.AddRange(materialModel.Elastic.Where(p => !p.Categories.Any()));
+               allProps.AddRange(materialModel.Elastic.Where(p => !p.Categories.Any()));
             }
 
-            var iprops = new List<IMaterialModelProperty>();
             IReadOnlyList<string> inelasticBehaviors;
             if ( this.TryGetInelasticBehaviors(out inelasticBehaviors))
             {
-               iprops.AddRange(materialModel.Inelastic.Where(p => p.Categories.Any(pc => inelasticBehaviors.Contains(pc)) || !p.Categories.Any()));
+               allProps.AddRange(materialModel.Inelastic.Where(p => p.Categories.Any(pc => inelasticBehaviors.Contains(pc)) || !p.Categories.Any()));
             }
             else
             {
-               iprops.AddRange(materialModel.Inelastic.Where(p => !p.Categories.Any()));
+               allProps.AddRange(materialModel.Inelastic.Where(p => !p.Categories.Any()));
             }
 
             var uniquePropName = new HashSet<string>();
             var props = new List<MaterialModelPropertyIDO>();
-            foreach (var p in gprops.Concat(eprops).Concat(iprops))
+            foreach (var p in allProps)
             {
                if (!uniquePropName.Contains(p.Property.Name))
                {

@@ -7,14 +7,14 @@ namespace MaterialModel.GUI
 {
    public static class IControlComboBoxExtensions
    {
-      public static string SelectionChanged(this IControlComboBox selection, object sender, SelectionChangedEventArgs e)
+      public static void SelectionChanged(this IControlComboBox selection, object sender, SelectionChangedEventArgs e, MainWindow window)
       {
          // ... Get the ComboBox.
          var comboBox = (ComboBox)sender;
          selection.CheckComboBox(comboBox);
          selection.ClearTail();
          selection.InitNext();
-         return selection.GetSelection();
+         window.Title = "Selected: " + selection.GetSelection(); ;
       }
 
       public static void CheckComboBox(this IControlComboBox selection, ComboBox cb)

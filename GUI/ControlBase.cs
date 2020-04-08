@@ -20,11 +20,10 @@ namespace MaterialModel.GUI
       {
          MyAskMeAnything = ame;
          Previous = prev;
-      }
-
-      public void SetNext(IControl nxt)
-      {
-         Next = nxt;
+         if ( prev != null)
+         {
+            prev.Next = this;
+         }
       }
 
 
