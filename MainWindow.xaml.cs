@@ -48,11 +48,7 @@ namespace MaterialModel
 
       private void SelectionFormation_Changed(object sender, SelectionChangedEventArgs e)
       {
-        var selectedRanges = m_selectionRange.SelectionChanged(sender, e, this);
-         if (selectedRanges.Any())
-         {
-            m_selectionMaterialModel.Init();
-         }
+         m_selectionRange.SelectionChanged(sender, e, this);
       }
       #endregion
 
@@ -67,17 +63,13 @@ namespace MaterialModel
          if (m_selectionMaterialModel == null)
          {
             m_selectionMaterialModel = new SelectionMaterialModel(comboBox, m_askMeAnything, m_selectionRange);
-            m_selectionRange.SetNext(m_selectionMaterialModel);
          }
-
-         m_selectionMaterialModel.CheckComboBox(comboBox);
          m_selectionMaterialModel.Init();
       }
 
       private void ComboBoxMaterialModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         string value = m_selectionMaterialModel.SelectionChanged(sender, e);
-         this.Title = "Selected: " + value;
+         m_selectionMaterialModel.SelectionChanged(sender, e, this);
       }
 
       #endregion
@@ -100,10 +92,6 @@ namespace MaterialModel
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          m_selectionElasticModel.SelectionChanged(sender, e, this);
-         if (m_dataGridProperties != null && m_selectionInelastic != null && !m_selectionInelastic.HasAnyOptions())
-         {
-               m_dataGridProperties.Init();
-         }
       }
 
       #endregion
@@ -126,7 +114,6 @@ namespace MaterialModel
       private void ComboBoxInelasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          m_selectionInelastic.SelectionChanged(sender, e, this);
-         m_dataGridProperties.Init();
       }
 
       #endregion
@@ -138,9 +125,7 @@ namespace MaterialModel
          if (m_dataGridProperties == null)
          {
             m_dataGridProperties = new PropertyPopulation(sender as DataGrid, m_askMeAnything, m_selectionInelastic);
-            m_selectionInelastic.SetNext(m_dataGridProperties);
          }
-         m_dataGridProperties.Init();
       }
 
       #endregion
