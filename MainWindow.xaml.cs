@@ -100,9 +100,9 @@ namespace MaterialModel
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          m_selectionElasticModel.SelectionChanged(sender, e, this);
-         if (m_selectionInelastic != null && !m_selectionInelastic.HasAnyOptions())
+         if (m_dataGridProperties != null && m_selectionInelastic != null && !m_selectionInelastic.HasAnyOptions())
          {
-            MaterialProperties_Fill();
+               m_dataGridProperties.Init();
          }
       }
 
@@ -126,7 +126,7 @@ namespace MaterialModel
       private void ComboBoxInelasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          m_selectionInelastic.SelectionChanged(sender, e, this);
-         MaterialProperties_Fill();
+         m_dataGridProperties.Init();
       }
 
       #endregion
@@ -140,16 +140,9 @@ namespace MaterialModel
             m_dataGridProperties = new PropertyPopulation(sender as DataGrid, m_askMeAnything, m_selectionInelastic);
             m_selectionInelastic.SetNext(m_dataGridProperties);
          }
-         MaterialProperties_Fill();
+         m_dataGridProperties.Init();
       }
 
-      private void MaterialProperties_Fill()
-      {
-         if (m_dataGridProperties != null)
-         {
-            m_dataGridProperties.Init();
-         }
-      }
       #endregion
 
    }

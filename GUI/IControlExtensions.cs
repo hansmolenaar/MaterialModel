@@ -16,9 +16,16 @@ namespace MaterialModel.GUI
             nxt.Clear();
             nxt = nxt.Next;
          }
-         if (selection.Next != null)
+         nxt = selection.Next;
+
+         while (nxt != null && nxt is IControlListBox && !(nxt as IControlListBox).HasAnyOptions())
          {
-            selection.Next.Init();
+            nxt.Clear();
+            nxt = nxt.Next;
+         }
+         if (nxt != null)
+         {
+            nxt.Init();
          }
       }
 
@@ -46,7 +53,7 @@ namespace MaterialModel.GUI
       public static IMaterialModel GetMaterialModelSafe(this IControl control)
       {
          IMaterialModel result;
-         if ( !control.TryGetMaterialModel(out result))
+         if (!control.TryGetMaterialModel(out result))
          {
             throw new Exception("Cannot find material model");
          }
