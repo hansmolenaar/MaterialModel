@@ -109,21 +109,19 @@ namespace MaterialModel
       {
 
          // ... Get the ComboBox reference.
-         var comboBox = sender as ComboBox;
+         var listBox = sender as ListBox;
          if (m_selectionInelastic == null)
          {
-            m_selectionInelastic = new SelectionInelastic(comboBox, m_askMeAnything, m_selectionElasticModel);
+            m_selectionInelastic = new SelectionInelastic(listBox, m_askMeAnything, m_selectionElasticModel);
             m_selectionElasticModel.SetNext(m_selectionInelastic);
          }
-         m_selectionInelastic.CheckComboBox(comboBox);
+         m_selectionInelastic.CheckListBox(listBox);
          m_selectionInelastic.Init();
       }
 
       private void ComboBoxInelasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         // ... Set SelectedItem as Window Title.
-         string value = m_selectionInelastic.SelectionChanged(sender, e);
-         this.Title = "Selected: " + value;
+         m_selectionInelastic.SelectionChanged(sender, e, this);
          MaterialProperties_Fill();
       }
 

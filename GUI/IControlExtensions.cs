@@ -76,6 +76,7 @@ namespace MaterialModel.GUI
          return false;
       }
 
+      // TODO combine with TryGetInelasticBehaviors
       public static bool TryGetElasticBehaviors(this IControl control, out IReadOnlyList<string> elasticBehaviors)
       {
          var selectElastic = (SelectionElastic)control.FindControl(c => c is SelectionElastic);
@@ -86,6 +87,19 @@ namespace MaterialModel.GUI
          }
 
          elasticBehaviors = null;
+         return false;
+      }
+
+      public static bool TryGetInelasticBehaviors(this IControl control, out IReadOnlyList<string> inelasticBehaviors)
+      {
+         var selectInelastic = (SelectionInelastic)control.FindControl(c => c is SelectionInelastic);
+         if (selectInelastic != null)
+         {
+            inelasticBehaviors = selectInelastic.GetSelections();
+            return inelasticBehaviors.Any();
+         }
+
+         inelasticBehaviors = null;
          return false;
       }
 

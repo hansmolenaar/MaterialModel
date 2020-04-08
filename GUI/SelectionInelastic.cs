@@ -7,45 +7,32 @@ using System.Windows.Controls;
 
 namespace MaterialModel.GUI
 {
-   public class SelectionInelastic : ControlBase, IControlComboBox
+   public class SelectionInelastic : ControlListBoxBase, IControlListBox
    {
       public const string InelasticModelDefault = "-- Select Inelastic Components --";
       public const string NoInelasticModel = "None";
-      public ComboBox MyComboBox { get; }
 
 
-      public SelectionInelastic(ComboBox comboBox, AskMeAnything ame, IControl prev) : base(ame, prev)
+
+      public SelectionInelastic(ListBox listBox, AskMeAnything ame, IControl prev) : base(ame, prev)
       {
-         MyComboBox = comboBox;
+         MyListBox = listBox;
          Clear();
-      }
-
-      public override void Clear()
-      {
-         MyComboBox.SelectedIndex = 0;
-         CurrentSelection = InelasticModelDefault;
       }
 
       public  string CurrentSelection { get; set; }
 
       public override void Init()
       {
-         var choices = new List<string>();
-         choices.Add(InelasticModelDefault);
+         var inelasticBehaviors = new List<string>();
          IMaterialModel materialModel;
-        
-         if ( this.TryGetMaterialModel(out materialModel))
+         if (this.TryGetMaterialModel(out materialModel))
          {
-            choices.AddRange(materialModel.Inelastic.SelectMany(p => p.Categories).Distinct());
-            if ( choices.Count == 1)
-            {
-               choices.Add(NoInelasticModel);
-            }
+            inelasticBehaviors.AddRange(materialModel.Inelastic.SelectMany(p => p.Categories).Distinct());
          }
-         MyComboBox.ItemsSource = choices;
-
-         // ... Make the first item selected.
-         MyComboBox.SelectedIndex = 0;
+         MyListBox.ItemsSource = inelasticBehaviors;
       }
+
+
    }
 }

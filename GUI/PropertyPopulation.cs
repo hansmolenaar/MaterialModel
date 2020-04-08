@@ -44,10 +44,15 @@ namespace MaterialModel.GUI
             {
                return;
             }
-
             var eProps = materialModel.Elastic.Where(p => p.Categories.Any(pc => elasticBehaviors.Contains(pc)) || !p.Categories.Any()).ToArray();
-            var iCategory = (Previous as SelectionInelastic).GetSelection(); ;
-            var iprops = materialModel.Inelastic.Where(p => p.Categories.Contains(iCategory) || !p.Categories.Any()).ToArray();
+
+            IReadOnlyList<string> inelasticBehaviors;
+            if ( !this.TryGetInelasticBehaviors(out inelasticBehaviors))
+            {
+               return;
+            }
+            var iprops = materialModel.Inelastic.Where(p => p.Categories.Any(pc => inelasticBehaviors.Contains(pc)) || !p.Categories.Any()).ToArray();
+
             var uniquePropName = new HashSet<string>();
             var props = new List<MaterialModelPropertyIDO>();
             foreach (var p in gprops.Concat(eProps).Concat(iprops))
