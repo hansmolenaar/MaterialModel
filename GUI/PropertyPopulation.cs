@@ -49,7 +49,8 @@ namespace MaterialModel.GUI
             IReadOnlyList<string> inelasticBehaviors;
             if ( !this.TryGetInelasticBehaviors(out inelasticBehaviors))
             {
-               return;
+               // TODO
+              // return;
             }
             var iprops = materialModel.Inelastic.Where(p => p.Categories.Any(pc => inelasticBehaviors.Contains(pc)) || !p.Categories.Any()).ToArray();
 

@@ -43,7 +43,7 @@ namespace MaterialModel
             m_selectionRange = new SelectionRange(listBox, m_askMeAnything, null);
             m_selectionRange.Init();
          }
-        // m_selectionRange.CheckComboBox(comboBox);
+         // m_selectionRange.CheckComboBox(comboBox);
 
       }
 
@@ -98,6 +98,10 @@ namespace MaterialModel
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          m_selectionElasticModel.SelectionChanged(sender, e, this);
+         if (m_selectionInelastic != null && !m_selectionInelastic.HasAnyOptions())
+         {
+            MaterialProperties_Fill();
+         }
       }
 
       #endregion

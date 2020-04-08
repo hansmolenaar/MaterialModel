@@ -8,13 +8,14 @@ namespace MaterialModel.RadiantApiSdk
 {
    public static class AskRadiant
    {
-      private static Formation[] m_formations = new Formation[]
+      private static ICellCollection[] m_formations = new ICellCollection[]
       {
          new Formation("Broom"),
          new Formation("Rannoch"),
          new Formation("Etive"),
          new Formation("Ness"),
-         new Formation("Tarbert")
+         new Formation("Tarbert"),
+         new Surface("Fault"),
       };
 
       public static IEnumerable<ICellCollection> GetCellCollections()

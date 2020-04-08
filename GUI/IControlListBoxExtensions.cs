@@ -15,25 +15,28 @@ namespace MaterialModel.GUI
          selection.ClearTail();
          var selectedItems = selection.GetSelections();
 
-         string errorMessage;
-         if ( !selection.CheckConsistentSelection(out errorMessage))
+         if (selectedItems.Any())
          {
-            selection.Init();
-            selection.MyListBox.UnselectAll();
-
-            // Show error message
-            window.Title = errorMessage;
-            return new string[0];
-         }
-
-         // Echo choice
-         {
-            string msg = "";
-            foreach (var val in selectedItems)
+            string errorMessage;
+            if (!selection.CheckConsistentSelection(out errorMessage))
             {
-               msg += (val + "  ");
+               selection.Init();
+               selection.MyListBox.UnselectAll();
+
+               // Show error message
+               window.Title = errorMessage;
+               return new string[0];
             }
-            window.Title = "Selected: " + msg;
+
+            // Echo choice
+            {
+               string msg = "";
+               foreach (var val in selectedItems)
+               {
+                  msg += (val + "  ");
+               }
+               window.Title = "Selected: " + msg;
+            }
          }
 
          return selectedItems;
@@ -45,6 +48,13 @@ namespace MaterialModel.GUI
          {
             throw new Exception("Unexpected list box");
          }
+      }
+
+      public static bool HasAnyOptions(this IControlListBox selection)
+      {
+         var itSourse = selection.MyListBox.ItemsSource;
+         var iter = itSourse.GetEnumerator();
+         return iter.MoveNext();
       }
 
       public static IReadOnlyList<string> GetSelections( this IControlListBox control)

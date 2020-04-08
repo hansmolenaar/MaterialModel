@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MaterialModel.RadiantApiSdk
 {
-   public class Formation : CellCollection, ICellCollection
+   public class Surface : CellCollection, ICellCollection
    {
 
-      public Formation(string name) : base(name, TopologicalSupport.Volume)
+      public Surface(string name) : base(name, TopologicalSupport.Surface)
       {
       }
 
