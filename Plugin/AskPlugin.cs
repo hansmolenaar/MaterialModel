@@ -14,6 +14,7 @@ namespace MaterialModel.Plugin
       private static IMaterialModel[] m_material = new IMaterialModel[] {
             new MaterialModelLinearElastic(),
             new MaterialModelMohrCoulomb(),
+            new MaterialModelCoulombFriction(),
          };
 
       public IEnumerable<IMaterialModel> AvailableMaterialModels { get { return m_material; } }

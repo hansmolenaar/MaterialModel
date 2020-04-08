@@ -1,4 +1,5 @@
 ﻿using MaterialModel.ClientFacing;
+using MaterialModel.RadiantApiSdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,21 @@ namespace MaterialModel.GUI
 
       public override void Init()
       {
-         // ... Assign the ItemsSource to the List.
-         MyComboBox.ItemsSource = new string[] { SelectionMaterialModel.MaterialModelDefault }.Concat(MyAskMeAnything.MaterialModels);
+         var items = new List<string>();
+         items.Add(MaterialModelDefault);
+
+         IReadOnlyList<ICellCollection> cellCollections;
+         if ( this.TryGetCellCollection(out cellCollections))
+         {
+            if (cellCollections.Any())
+            {
+               var support = cellCollections.First().Support;
+               var matMods = MyAskMeAnything.AvailableMaterialModel.Where(mm => mm.Support == support).Select(mmm => mmm.DisplayName);
+               items.AddRange(matMods);
+            }
+         }
+
+         MyComboBox.ItemsSource = items;
 
          // ... Make the first item selected.
          MyComboBox.SelectedIndex = 0;

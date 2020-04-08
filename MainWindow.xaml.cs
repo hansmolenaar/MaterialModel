@@ -43,14 +43,16 @@ namespace MaterialModel
             m_selectionRange = new SelectionRange(listBox, m_askMeAnything, null);
             m_selectionRange.Init();
          }
-         // m_selectionRange.CheckComboBox(comboBox);
-
       }
 
 
       private void SelectionFormation_Changed(object sender, SelectionChangedEventArgs e)
       {
-         m_selectionRange.SelectionChanged(sender, e, this);
+        var selectedRanges = m_selectionRange.SelectionChanged(sender, e, this);
+         if (selectedRanges.Any())
+         {
+            m_selectionMaterialModel.Init();
+         }
       }
       #endregion
 

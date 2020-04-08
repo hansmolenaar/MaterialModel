@@ -20,7 +20,6 @@ namespace MaterialModel.GUI
             string errorMessage;
             if (!selection.CheckConsistentSelection(out errorMessage))
             {
-               selection.Init();
                selection.MyListBox.UnselectAll();
 
                // Show error message
