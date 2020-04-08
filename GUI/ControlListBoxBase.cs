@@ -23,6 +23,10 @@ namespace MaterialModel.GUI
 
       protected ControlListBoxBase(AskMeAnything ame, IControl prev) : base(ame, prev)
       {
+         if (prev != null)
+         {
+            prev.Next = this;
+         }
       }
 
 

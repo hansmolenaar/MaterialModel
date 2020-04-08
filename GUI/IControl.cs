@@ -9,7 +9,7 @@ namespace MaterialModel.GUI
    {
       AskMeAnything MyAskMeAnything { get; }
       IControl Previous { get; }
-      IControl Next { get; }
+      IControl Next { get; set; }
       void Clear();
 
       void Init();

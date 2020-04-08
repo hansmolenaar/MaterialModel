@@ -90,7 +90,6 @@ namespace MaterialModel
          if (m_selectionElasticModel == null)
          {
             m_selectionElasticModel = new SelectionElastic(listBox, m_askMeAnything, m_selectionMaterialModel);
-            m_selectionMaterialModel.SetNext(m_selectionElasticModel);
          }
          m_selectionElasticModel.CheckListBox(listBox);
          m_selectionElasticModel.Init();
@@ -113,7 +112,6 @@ namespace MaterialModel
          if (m_selectionInelastic == null)
          {
             m_selectionInelastic = new SelectionInelastic(listBox, m_askMeAnything, m_selectionElasticModel);
-            m_selectionElasticModel.SetNext(m_selectionInelastic);
          }
          m_selectionInelastic.CheckListBox(listBox);
          m_selectionInelastic.Init();

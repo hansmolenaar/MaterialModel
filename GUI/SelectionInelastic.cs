@@ -9,10 +9,7 @@ namespace MaterialModel.GUI
 {
    public class SelectionInelastic : ControlListBoxBase, IControlListBox
    {
-      public const string InelasticModelDefault = "-- Select Inelastic Components --";
       public const string NoInelasticModel = "None";
-
-
 
       public SelectionInelastic(ListBox listBox, AskMeAnything ame, IControl prev) : base(ame, prev)
       {
@@ -20,7 +17,6 @@ namespace MaterialModel.GUI
          Clear();
       }
 
-      public  string CurrentSelection { get; set; }
 
       public override void Init()
       {

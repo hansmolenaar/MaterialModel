@@ -11,7 +11,7 @@ namespace MaterialModel.GUI
 
       public IControl Previous { get; }
 
-      public IControl Next { get; protected set; }
+      public IControl Next { get; set; }
 
       public abstract void Clear();
       public abstract void Init();

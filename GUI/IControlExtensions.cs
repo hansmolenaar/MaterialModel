@@ -76,31 +76,28 @@ namespace MaterialModel.GUI
          return false;
       }
 
-      // TODO combine with TryGetInelasticBehaviors
+      private static bool TryGetBehaviors(this IControlListBox listBox, out IReadOnlyList<string> behaviors)
+      {
+         if (listBox != null)
+         {
+            behaviors = listBox.GetSelections();
+            return behaviors.Any();
+         }
+
+         behaviors = null;
+         return false;
+      }
+
       public static bool TryGetElasticBehaviors(this IControl control, out IReadOnlyList<string> elasticBehaviors)
       {
          var selectElastic = (SelectionElastic)control.FindControl(c => c is SelectionElastic);
-         if (selectElastic != null)
-         {
-            elasticBehaviors = selectElastic.GetSelections();        
-            return elasticBehaviors.Any();
-         }
-
-         elasticBehaviors = null;
-         return false;
+         return selectElastic.TryGetBehaviors(out elasticBehaviors);
       }
 
       public static bool TryGetInelasticBehaviors(this IControl control, out IReadOnlyList<string> inelasticBehaviors)
       {
          var selectInelastic = (SelectionInelastic)control.FindControl(c => c is SelectionInelastic);
-         if (selectInelastic != null)
-         {
-            inelasticBehaviors = selectInelastic.GetSelections();
-            return inelasticBehaviors.Any();
-         }
-
-         inelasticBehaviors = null;
-         return false;
+         return selectInelastic.TryGetBehaviors(out inelasticBehaviors);
       }
 
    }
