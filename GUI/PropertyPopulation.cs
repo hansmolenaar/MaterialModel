@@ -39,24 +39,32 @@ namespace MaterialModel.GUI
             {
                gprops = MyAskMeAnything.AskPlugin.GetGeneralProperties(cellCollection.Select(cc => cc.Support).Distinct().Single());
             }
-            IReadOnlyList<string> elasticBehaviors;
-            if (!this.TryGetElasticBehaviors(out elasticBehaviors))
-            {
-               return;
-            }
-            var eProps = materialModel.Elastic.Where(p => p.Categories.Any(pc => elasticBehaviors.Contains(pc)) || !p.Categories.Any()).ToArray();
 
-            IReadOnlyList<string> inelasticBehaviors;
-            if ( !this.TryGetInelasticBehaviors(out inelasticBehaviors))
+            var eprops = new List<IMaterialModelProperty>();
+            IReadOnlyList<string> elasticBehaviors;
+            if (this.TryGetElasticBehaviors(out elasticBehaviors))
             {
-               // TODO
-              // return;
+               eprops.AddRange(materialModel.Elastic.Where(p => p.Categories.Any(pc => elasticBehaviors.Contains(pc)) || !p.Categories.Any()));
             }
-            var iprops = materialModel.Inelastic.Where(p => p.Categories.Any(pc => inelasticBehaviors.Contains(pc)) || !p.Categories.Any()).ToArray();
+            else
+            {
+               eprops.AddRange(materialModel.Elastic.Where(p => !p.Categories.Any()));
+            }
+
+            var iprops = new List<IMaterialModelProperty>();
+            IReadOnlyList<string> inelasticBehaviors;
+            if ( this.TryGetInelasticBehaviors(out inelasticBehaviors))
+            {
+               iprops.AddRange(materialModel.Inelastic.Where(p => p.Categories.Any(pc => inelasticBehaviors.Contains(pc)) || !p.Categories.Any()));
+            }
+            else
+            {
+               iprops.AddRange(materialModel.Inelastic.Where(p => !p.Categories.Any()));
+            }
 
             var uniquePropName = new HashSet<string>();
             var props = new List<MaterialModelPropertyIDO>();
-            foreach (var p in gprops.Concat(eProps).Concat(iprops))
+            foreach (var p in gprops.Concat(eprops).Concat(iprops))
             {
                if (!uniquePropName.Contains(p.Property.Name))
                {
