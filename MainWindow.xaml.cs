@@ -41,8 +41,8 @@ namespace MaterialModel
          if (m_selectionRange == null)
          {
             m_selectionRange = new SelectionRange(listBox, m_askMeAnything, null);
-            m_selectionRange.Init();
          }
+         m_selectionRange.Init();
       }
 
 
@@ -85,7 +85,6 @@ namespace MaterialModel
          {
             m_selectionElasticModel = new SelectionElastic(listBox, m_askMeAnything, m_selectionMaterialModel);
          }
-         m_selectionElasticModel.CheckListBox(listBox);
          m_selectionElasticModel.Init();
       }
 
