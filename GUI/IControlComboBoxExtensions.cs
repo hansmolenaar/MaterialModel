@@ -13,6 +13,7 @@ namespace MaterialModel.GUI
          var comboBox = (ComboBox)sender;
          selection.CheckComboBox(comboBox);
          selection.ClearTail();
+         selection.InitNext();
          return selection.GetSelection();
       }
 

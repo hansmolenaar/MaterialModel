@@ -15,21 +15,25 @@ namespace MaterialModel.GUI
          {
             nxt.Clear();
             nxt = nxt.Next;
-         }
-         nxt = selection.Next;
+         }       
+      }
 
-         while (nxt != null && nxt is IControlListBox && !(nxt as IControlListBox).HasAnyOptions())
+      public static void InitNext(this IControl selection)
+      {
+         var cur = selection.Next;
+         while ( cur != null )
          {
-            nxt.Clear();
-            nxt = nxt.Next;
-         }
-         if (nxt != null)
-         {
-            nxt.Init();
+            cur.Init();
+            var listBox = cur as IControlListBox;
+            if ( listBox == null || listBox.HasAnyOptions())
+            {
+               break;
+            }
+            cur = cur.Next;
          }
       }
 
-      private static IControl FindControl(this IControl currentControl, Predicate<IControl> accept)
+         private static IControl FindControl(this IControl currentControl, Predicate<IControl> accept)
       {
          while (currentControl != null && !accept(currentControl))
          {

@@ -13,6 +13,7 @@ namespace MaterialModel.GUI
          var listBox = (ListBox)sender;
          selection.CheckListBox(listBox);
          selection.ClearTail();
+         selection.InitNext();
          var selectedItems = selection.GetSelections();
 
          if (selectedItems.Any())
