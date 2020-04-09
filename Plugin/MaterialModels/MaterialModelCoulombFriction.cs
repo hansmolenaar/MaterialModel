@@ -12,21 +12,21 @@ namespace MaterialModel.Plugin
 {
    public class MaterialModelCoulombFriction : IMaterialModel
    {
-      private IMaterialModelProperty[] m_components = new IMaterialModelProperty[] {
+
+
+      private static IMaterialModelProperty[] m_components = new IMaterialModelProperty[] {
          new MaterialModelProperty(PropertySingleValueFactory.CreateFrictionAngle()),
           new MaterialModelProperty(PropertySingleValueFactory.CreateCohesion()),
       };
+      private static MaterialModelPropertyGroup m_inelastic = MaterialModelPropertyGroup.CreateNoCheck(m_components);
+      private static MaterialModelPropertyGroup m_elastic = MaterialModelPropertyGroup.CreateEmpty();
 
       public TopologicalSupport Support { get { return TopologicalSupport.Surface; } }
 
       public string DisplayName { get { return "Coulomb Friction"; } }
-      public IEnumerable<IMaterialModelProperty> Elastic { get { return Enumerable.Empty<IMaterialModelProperty>(); } }
-      public IEnumerable<IMaterialModelProperty> Inelastic { get { return m_components; } }
 
-      public bool AreElasticBehaviorsConsistent(IReadOnlyList<string> behaviors, out string errorMessage)
-      {
-         errorMessage = string.Empty;
-         return true;
-      }
+      public IMaterialModelPropertyGroup ElasticBehaviors { get { return m_elastic; } }
+      public IMaterialModelPropertyGroup InelasticBehaviors { get { return m_inelastic; } }
+
    }
 }

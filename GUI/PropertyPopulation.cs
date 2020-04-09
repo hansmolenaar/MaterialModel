@@ -43,21 +43,21 @@ namespace MaterialModel.GUI
             IReadOnlyList<string> elasticBehaviors;
             if (this.TryGetElasticBehaviors(out elasticBehaviors))
             {
-               allProps.AddRange(materialModel.Elastic.Where(p => p.Categories.Any(pc => elasticBehaviors.Contains(pc)) || !p.Categories.Any()));
+               allProps.AddRange(materialModel.ElasticBehaviors.Properties.Where(p => p.Categories.Any(pc => elasticBehaviors.Contains(pc)) || !p.Categories.Any()));
             }
             else
             {
-               allProps.AddRange(materialModel.Elastic.Where(p => !p.Categories.Any()));
+               allProps.AddRange(materialModel.ElasticBehaviors.Properties.Where(p => !p.Categories.Any()));
             }
 
             IReadOnlyList<string> inelasticBehaviors;
             if ( this.TryGetInelasticBehaviors(out inelasticBehaviors))
             {
-               allProps.AddRange(materialModel.Inelastic.Where(p => p.Categories.Any(pc => inelasticBehaviors.Contains(pc)) || !p.Categories.Any()));
+               allProps.AddRange(materialModel.InelasticBehaviors.Properties.Where(p => p.Categories.Any(pc => inelasticBehaviors.Contains(pc)) || !p.Categories.Any()));
             }
             else
             {
-               allProps.AddRange(materialModel.Inelastic.Where(p => !p.Categories.Any()));
+               allProps.AddRange(materialModel.InelasticBehaviors.Properties.Where(p => !p.Categories.Any()));
             }
 
             var uniquePropName = new HashSet<string>();

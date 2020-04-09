@@ -28,7 +28,7 @@ namespace MaterialModel.ClientFacing
          var matmodel = AvailableMaterialModel.Where(m => m.DisplayName == materialModel).SingleOrDefault();
          if (matmodel != null)
          {
-            return matmodel.Elastic.SelectMany(c => c.Categories).Distinct();
+            return matmodel.ElasticBehaviors.Properties.SelectMany(c => c.Categories).Distinct();
          }
          else
          {

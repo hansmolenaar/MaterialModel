@@ -21,7 +21,7 @@ namespace MaterialModel.GUI
       public override bool CheckConsistentSelection(out string errorMessage)
       {
          var materialModel = this.GetMaterialModelSafe();
-         return materialModel.AreElasticBehaviorsConsistent(this.GetSelections(), out errorMessage);
+         return materialModel.ElasticBehaviors.ConistencyChecker(this.GetSelections(), out errorMessage);
       }
 
       public override void Init()

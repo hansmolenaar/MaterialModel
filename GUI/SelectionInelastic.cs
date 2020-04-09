@@ -24,7 +24,7 @@ namespace MaterialModel.GUI
          IMaterialModel materialModel;
          if (this.TryGetMaterialModel(out materialModel))
          {
-            inelasticBehaviors.AddRange(materialModel.Inelastic.SelectMany(p => p.Categories).Distinct());
+            inelasticBehaviors.AddRange(materialModel.InelasticBehaviors.Properties.SelectMany(p => p.Categories).Distinct());
          }
          MyListBox.ItemsSource = inelasticBehaviors;
       }

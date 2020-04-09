@@ -17,7 +17,7 @@ namespace MaterialModel.Plugin
       private const string s_bulkAndShear = "Bulk and Shear Modulus";
       public const string TranseverseIsotropic = "Transverse Isotropic";
       public const string LinearThermalExpansion = "Linear Thermal Expansion";
-      private IMaterialModelProperty[] m_components = new IMaterialModelProperty[] {
+      private static IMaterialModelProperty[] m_components = new IMaterialModelProperty[] {
          new MaterialModelProperty(PropertySingleValueFactory.CreateYoungModulus(), s_youngAndPoisson),
          new MaterialModelProperty(PropertySingleValueFactory.CreatePoissonRatio(), s_youngAndPoisson),
          new MaterialModelProperty(PropertySingleValueFactory.CreateBulkModulus(), s_bulkAndShear),
@@ -32,13 +32,16 @@ namespace MaterialModel.Plugin
          new MaterialModelProperty(PropertySingleValueFactory.CreateThermalExpansion(), LinearThermalExpansion),
       };
 
+      private static MaterialModelPropertyGroup m_elastic = MaterialModelPropertyGroup.Create(m_components, AreElasticBehaviorsConsistent);
+      private static MaterialModelPropertyGroup m_inelastic = MaterialModelPropertyGroup.CreateEmpty();
+
       public string DisplayName { get { return "Linear Elastic"; } }
 
       public TopologicalSupport Support { get { return TopologicalSupport.Volume; } }
-      public IEnumerable<IMaterialModelProperty> Elastic { get { return m_components; } }
-      public IEnumerable<IMaterialModelProperty> Inelastic { get { return Enumerable.Empty<IMaterialModelProperty>(); } }
+      public IMaterialModelPropertyGroup ElasticBehaviors { get { return m_elastic; } }
+      public IMaterialModelPropertyGroup InelasticBehaviors { get { return m_inelastic; } }
 
-      public bool AreElasticBehaviorsConsistent(IReadOnlyList<string> behaviors, out string errorMessage)
+      private static bool AreElasticBehaviorsConsistent(IReadOnlyList<string> behaviors, out string errorMessage)
       {
          errorMessage = string.Empty;
          var baseBehaviors = behaviors.Where(b => b != LinearThermalExpansion).Distinct().ToArray();
