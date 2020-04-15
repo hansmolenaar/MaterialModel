@@ -63,7 +63,7 @@
          Margin="80,420,0,0" 
          VerticalAlignment="Top" 
          Width="402"/>
-      <TextBlock HorizontalAlignment="Left" Height="28" Margin="514,486,0,0" Text="TODO: add arrays/tabels/functions" TextWrapping="Wrap" VerticalAlignment="Top" Width="212"/>
+      <TextBlock HorizontalAlignment="Left" Height="28" Margin="514,486,0,0" Text="TODO: add arrays/tables/functions" TextWrapping="Wrap" VerticalAlignment="Top" Width="212"/>
 
 
 
