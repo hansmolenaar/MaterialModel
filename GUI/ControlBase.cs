@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using MaterialModel.RadiantApiSdk;
 
 namespace MaterialModel.GUI
 {
@@ -13,14 +14,17 @@ namespace MaterialModel.GUI
 
       public IControl Next { get; set; }
 
+      public MessageHandler MyMessageHandler { get; }
+
       public abstract void Clear();
       public abstract void Init();
 
-      protected ControlBase(AskMeAnything ame, IControl prev)
+      protected ControlBase(AskMeAnything ame, IControl prev, MessageHandler messageHandler)
       {
+         MyMessageHandler = messageHandler;
          MyAskMeAnything = ame;
          Previous = prev;
-         if ( prev != null)
+         if (prev != null)
          {
             prev.Next = this;
          }

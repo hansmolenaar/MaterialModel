@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,11 +11,14 @@ namespace MaterialModel.RadiantApiSdk
 {
    public class MaterialModelPropertyIDO
    {
-      public MaterialModelPropertyIDO(IMaterialModelProperty prop)
+      private readonly MessageHandler m_messageHendler;
+
+      public MaterialModelPropertyIDO(IMaterialModelProperty prop, MessageHandler messageHandler)
       {
+         m_messageHendler = messageHandler;
          Property = prop;
          Name = prop.Property.Name;
-         if ( string.IsNullOrEmpty(Name))
+         if (string.IsNullOrEmpty(Name))
          {
             throw new Exception("MaterialModelPropertyIDO: expect property name");
          }
@@ -23,7 +27,27 @@ namespace MaterialModel.RadiantApiSdk
       }
 
       public string Name { get; }
-      public double Value { get; set; }
+
+      private double m_value = 0;
+      public double Value
+      {
+         get
+         {
+            return m_value;
+         }
+         set
+         {
+            if (Property.Property.IsValid(value, out string errorMessage))
+            {
+               m_value = value;
+            }
+            else
+            {
+               m_messageHendler.Error( "Unexpected value " + value + " for " + Name);
+            }
+         }
+      }
+
       public string Unit { get; }
 
       private IMaterialModelProperty Property { get; }

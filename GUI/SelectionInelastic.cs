@@ -11,7 +11,7 @@ namespace MaterialModel.GUI
    {
       public const string NoInelasticModel = "None";
 
-      public SelectionInelastic(ListBox listBox, AskMeAnything ame, IControl prev) : base(ame, prev)
+      public SelectionInelastic(ListBox listBox, AskMeAnything ame, IControl prev, MessageHandler messageHandler) : base(ame, prev, messageHandler)
       {
          MyListBox = listBox;
          Clear();

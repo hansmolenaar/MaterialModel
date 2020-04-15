@@ -7,7 +7,7 @@ namespace MaterialModel.GUI
 {
    public static class IControlListBoxExtensions
    {
-      public static IReadOnlyList<string> SelectionChanged(this IControlListBox selection, object sender, SelectionChangedEventArgs e, MainWindow window)
+      public static IReadOnlyList<string> SelectionChanged(this IControlListBox selection, object sender, SelectionChangedEventArgs e)
       {
          // ... Get the ComboBox.
          var listBox = (ListBox)sender;
@@ -25,7 +25,7 @@ namespace MaterialModel.GUI
                selection.ClearTail();
 
                // Show error message
-               window.Title = "!!!ERROR!!!  " + errorMessage;
+               selection.MyMessageHandler.Error(errorMessage);
                return new string[0];
             }
 
@@ -36,7 +36,8 @@ namespace MaterialModel.GUI
                {
                   msg += (val + "  ");
                }
-               window.Title = "Selected: " + msg;
+
+               selection.MyMessageHandler.Info("Selected: " + msg);
             }
          }
 

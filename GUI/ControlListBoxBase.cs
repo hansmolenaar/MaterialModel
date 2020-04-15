@@ -24,7 +24,7 @@ namespace MaterialModel.GUI
          return true;
       }
 
-      protected ControlListBoxBase(AskMeAnything ame, IControl prev) : base(ame, prev)
+      protected ControlListBoxBase(AskMeAnything ame, IControl prev, MessageHandler messageHandler) : base(ame, prev, messageHandler)
       {
       }
 

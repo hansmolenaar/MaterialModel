@@ -24,10 +24,11 @@ namespace MaterialModel
       private PropertyPopulation m_dataGridProperties;
 
       private AskMeAnything m_askMeAnything { get; }
-
+      private MessageHandler m_messageHandler { get; }
       public MainWindow()
       {
          m_askMeAnything = new AskMeAnything();
+         m_messageHandler = new MessageHandler(this);
          InitializeComponent();
       }
 
@@ -40,7 +41,7 @@ namespace MaterialModel
          var listBox = sender as ListBox;
          if (m_selectionRange == null)
          {
-            m_selectionRange = new SelectionRange(listBox, m_askMeAnything, null);
+            m_selectionRange = new SelectionRange(listBox, m_askMeAnything, null, m_messageHandler);
          }
          m_selectionRange.Init();
       }
@@ -48,7 +49,7 @@ namespace MaterialModel
 
       private void SelectionFormation_Changed(object sender, SelectionChangedEventArgs e)
       {
-         m_selectionRange.SelectionChanged(sender, e, this);
+         m_selectionRange.SelectionChanged(sender, e);
       }
       #endregion
 
@@ -62,14 +63,14 @@ namespace MaterialModel
          var comboBox = sender as ComboBox;
          if (m_selectionMaterialModel == null)
          {
-            m_selectionMaterialModel = new SelectionMaterialModel(comboBox, m_askMeAnything, m_selectionRange);
+            m_selectionMaterialModel = new SelectionMaterialModel(comboBox, m_askMeAnything, m_selectionRange, m_messageHandler);
          }
          m_selectionMaterialModel.Init();
       }
 
       private void ComboBoxMaterialModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         m_selectionMaterialModel.SelectionChanged(sender, e, this);
+         m_selectionMaterialModel.SelectionChanged(sender, e);
       }
 
       #endregion
@@ -83,14 +84,14 @@ namespace MaterialModel
          var listBox = sender as ListBox;
          if (m_selectionElasticModel == null)
          {
-            m_selectionElasticModel = new SelectionElastic(listBox, m_askMeAnything, m_selectionMaterialModel);
+            m_selectionElasticModel = new SelectionElastic(listBox, m_askMeAnything, m_selectionMaterialModel, m_messageHandler);
          }
          m_selectionElasticModel.Init();
       }
 
       private void ComboBoxElasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         m_selectionElasticModel.SelectionChanged(sender, e, this);
+         m_selectionElasticModel.SelectionChanged(sender, e);
       }
 
       #endregion
@@ -104,7 +105,7 @@ namespace MaterialModel
          var listBox = sender as ListBox;
          if (m_selectionInelastic == null)
          {
-            m_selectionInelastic = new SelectionInelastic(listBox, m_askMeAnything, m_selectionElasticModel);
+            m_selectionInelastic = new SelectionInelastic(listBox, m_askMeAnything, m_selectionElasticModel, m_messageHandler);
          }
          m_selectionInelastic.CheckListBox(listBox);
          m_selectionInelastic.Init();
@@ -112,7 +113,7 @@ namespace MaterialModel
 
       private void ComboBoxInelasticModel_SelectionChanged(object sender, SelectionChangedEventArgs e)
       {
-         m_selectionInelastic.SelectionChanged(sender, e, this);
+         m_selectionInelastic.SelectionChanged(sender, e);
       }
 
       #endregion
@@ -123,7 +124,7 @@ namespace MaterialModel
       {
          if (m_dataGridProperties == null)
          {
-            m_dataGridProperties = new PropertyPopulation(sender as DataGrid, m_askMeAnything, m_selectionInelastic);
+            m_dataGridProperties = new PropertyPopulation(sender as DataGrid, m_askMeAnything, m_selectionInelastic, m_messageHandler);
          }
       }
 

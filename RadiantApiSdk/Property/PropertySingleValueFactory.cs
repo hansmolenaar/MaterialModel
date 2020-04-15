@@ -122,14 +122,14 @@ namespace MaterialModel.RadiantApiSdk.Property
    {
       public static IPropertySingleValue CreateDensity()
       {
-         var result = new SingleValueImpl("Rock density", QuantityFactory.Density, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+         var result = new SingleValueImpl("Rock density", QuantityFactory.Density, ValueBoundFactory.Create(0.0, ValueBoundType.GE));
          return result;
       }
 
       
       public static IPropertySingleValue CreateYoungModulus()
       {
-         var result = new SingleValueImpl("YoundModulus", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+         var result = new SingleValueImpl("YoundModulus", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GE));
          return result;
       }
 
@@ -141,7 +141,7 @@ namespace MaterialModel.RadiantApiSdk.Property
 
       public static IPropertySingleValue CreatePoissonRatio()
       {
-         return new SingleValueImpl("PossonRatio", QuantityFactory.Dimensionless, ValueBoundFactory.Create(0.0, ValueBoundType.GE), ValueBoundFactory.Create(0.5, ValueBoundType.LE));
+         return new SingleValueImpl("PoissonRatio", QuantityFactory.Dimensionless, ValueBoundFactory.Create(0.0, ValueBoundType.GE), ValueBoundFactory.Create(0.5, ValueBoundType.LE));
       }
 
       public static IPropertySingleValue CreateBulkModulus()
@@ -173,17 +173,17 @@ namespace MaterialModel.RadiantApiSdk.Property
 
       public static IPropertySingleValue CreateTensionCutoff()
       {
-         return new SingleValueImpl("Tension Cutoff", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+         return new SingleValueImpl("Tension Cutoff", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GE));
       }
 
       public static IPropertySingleValue CreateCohesion()
       {
-         return new SingleValueImpl("Cohesion", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+         return new SingleValueImpl("Cohesion", QuantityFactory.Pressure, ValueBoundFactory.Create(0.0, ValueBoundType.GE));
       }
 
       public static IPropertySingleValue CreateThermalExpansion()
       {
-         return new SingleValueImpl("Linear Thermal Expansion", QuantityFactory.ThermalExpansion, ValueBoundFactory.Create(0.0, ValueBoundType.GT));
+         return new SingleValueImpl("Linear Thermal Expansion", QuantityFactory.ThermalExpansion, ValueBoundFactory.Create(0.0, ValueBoundType.GE));
       }
 
    }

@@ -12,7 +12,7 @@ namespace MaterialModel.GUI
       public const string MaterialModelDefault = "-- Select Material Model --";
       public ComboBox MyComboBox { get; }
 
-      public SelectionMaterialModel(ComboBox comboBox, AskMeAnything ame, IControl prev) : base(ame, prev)
+      public SelectionMaterialModel(ComboBox comboBox, AskMeAnything ame, IControl prev, MessageHandler messageHandler) : base(ame, prev, messageHandler)
       {
          MyComboBox = comboBox;
          Clear();

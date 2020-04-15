@@ -10,7 +10,7 @@ namespace MaterialModel.GUI
    public class SelectionRange : ControlListBoxBase, IControlListBox
    {
 
-      public SelectionRange(ListBox listBox, AskMeAnything ame, IControl prev) : base(ame, prev)
+      public SelectionRange(ListBox listBox, AskMeAnything ame, IControl prev, MessageHandler messageHandler) : base(ame, prev, messageHandler)
       {
          MyListBox = listBox;
          Clear();

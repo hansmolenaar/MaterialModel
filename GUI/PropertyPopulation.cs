@@ -11,7 +11,7 @@ namespace MaterialModel.GUI
    {
       public DataGrid MyDataGrid { get; }
 
-      public PropertyPopulation(DataGrid dataGridProperties, AskMeAnything ame, IControl prev) : base(ame, prev)
+      public PropertyPopulation(DataGrid dataGridProperties, AskMeAnything ame, IControl prev, MessageHandler messageHandler) : base(ame, prev, messageHandler)
       {
          MyDataGrid = dataGridProperties;
       }
@@ -64,7 +64,7 @@ namespace MaterialModel.GUI
                if (!uniquePropName.Contains(p.Property.Name))
                {
                   uniquePropName.Add(p.Property.Name);
-                  props.Add(new MaterialModelPropertyIDO(p));
+                  props.Add(new MaterialModelPropertyIDO(p, MyMessageHandler));
                }
             }
             MyDataGrid.ItemsSource = props;
