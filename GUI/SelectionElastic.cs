@@ -18,10 +18,12 @@ namespace MaterialModel.GUI
          Clear();
       }
 
-      public override bool CheckConsistentSelection(out string errorMessage)
+      public override ConsistencyChecker ConsistencyChecker { get { return CheckConsistentSelection; } }
+
+      private bool CheckConsistentSelection(IReadOnlyList<string> choices,  out string errorMessage)
       {
          var materialModel = this.GetMaterialModelSafe();
-         return materialModel.ElasticBehaviors.ConistencyChecker(this.GetSelections(), out errorMessage);
+         return materialModel.ElasticBehaviors.ConistencyChecker(choices, out errorMessage);
       }
 
       public override void Init()

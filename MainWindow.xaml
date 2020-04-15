@@ -59,7 +59,7 @@
          Grid.Column="0" 
          Grid.Row="0"
          HorizontalAlignment="Left" 
-         Height="160" 
+         Height="192" 
          Margin="80,420,0,0" 
          VerticalAlignment="Top" 
          Width="402"/>

@@ -42,6 +42,15 @@ namespace MaterialModel.ClientFacing
          return cellCollection != null;
       }
 
-     
+      public ICellCollection GetCellCollection(string name)
+      {
+         if ( !TryGetCellCollection(name, out ICellCollection result))
+         {
+            throw new Exception("Not a known cell collection: " + name);
+         }
+         return result;
+      }
+
+
    }
 }

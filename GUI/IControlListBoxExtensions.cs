@@ -19,12 +19,13 @@ namespace MaterialModel.GUI
          if (selectedItems.Any())
          {
             string errorMessage;
-            if (!selection.CheckConsistentSelection(out errorMessage))
+            if (!selection.ConsistencyChecker(selectedItems, out errorMessage))
             {
                selection.MyListBox.UnselectAll();
+               selection.ClearTail();
 
                // Show error message
-               window.Title = errorMessage;
+               window.Title = "!!!ERROR!!!  " + errorMessage;
                return new string[0];
             }
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
+using MaterialModel.RadiantApiSdk;
 
 namespace MaterialModel.GUI
 {
@@ -15,7 +16,9 @@ namespace MaterialModel.GUI
          MyListBox.ItemsSource = new string[0];
       }
 
-      public virtual bool CheckConsistentSelection(out string errorMessage)
+      public virtual ConsistencyChecker ConsistencyChecker { get { return CheckConsistentSelection; } }
+
+      private bool CheckConsistentSelection(IReadOnlyList<string> choices, out string errorMessage)
       {
          errorMessage = string.Empty;
          return true;

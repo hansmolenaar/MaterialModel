@@ -7,7 +7,7 @@ namespace MaterialModel.RadiantApiSdk
    public class MaterialModelPropertyGroup : IMaterialModelPropertyGroup
    {
       #region constructor
-      private MaterialModelPropertyGroup(IEnumerable<IMaterialModelProperty> props, BehaviorsConsistencyChecker checker)
+      private MaterialModelPropertyGroup(IEnumerable<IMaterialModelProperty> props, ConsistencyChecker checker)
       {
          Properties = props.ToArray();
          ConistencyChecker = checker;
@@ -15,7 +15,7 @@ namespace MaterialModel.RadiantApiSdk
  
 
     
-      public static MaterialModelPropertyGroup Create(IEnumerable<IMaterialModelProperty> props, BehaviorsConsistencyChecker checker)
+      public static MaterialModelPropertyGroup Create(IEnumerable<IMaterialModelProperty> props, ConsistencyChecker checker)
       {
          return new MaterialModelPropertyGroup(props, checker);
       }
@@ -33,7 +33,7 @@ namespace MaterialModel.RadiantApiSdk
 
       #region Implementation IMaterialModelPropertyGroup
       public IEnumerable<IMaterialModelProperty> Properties { get; }
-      public BehaviorsConsistencyChecker ConistencyChecker { get; }
+      public ConsistencyChecker ConistencyChecker { get; }
       #endregion
 
       #region Yes man

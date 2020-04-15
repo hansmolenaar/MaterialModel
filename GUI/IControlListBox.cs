@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
+using MaterialModel.RadiantApiSdk;
 
 namespace MaterialModel.GUI
 {
@@ -10,6 +11,6 @@ namespace MaterialModel.GUI
       ListBox MyListBox { get; }
 
       // Return succes
-      bool CheckConsistentSelection(out string errorMessage);
+      ConsistencyChecker ConsistencyChecker { get; }
    }
 }
