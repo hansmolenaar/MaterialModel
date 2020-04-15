@@ -47,7 +47,7 @@
          VerticalAlignment="Top" 
          Width="238"/>
 
-      <TextBlock HorizontalAlignment="Left" Height="30" Margin="341,34,0,0" Text="Formation" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+      <TextBlock HorizontalAlignment="Left" Height="30" Margin="341,34,0,0" Text="Range" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
       <TextBlock HorizontalAlignment="Left" Height="20" Margin="341,193,0,0" Text="Material Model" TextWrapping="Wrap" VerticalAlignment="Top" Width="108"/>
       <TextBlock HorizontalAlignment="Left" Height="18" Margin="184,244,0,0" Text="Elastic Behaviors" TextWrapping="Wrap" VerticalAlignment="Top" Width="122"/>
       <TextBlock HorizontalAlignment="Left" Height="20" Margin="472,243,0,0" Text="Inelastic Behaviors" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
