@@ -133,6 +133,12 @@ namespace MaterialModel.RadiantApiSdk.Property
          return result;
       }
 
+      public static IPropertySingleValue CreateStiffness()
+      {
+         var result = new SingleValueImpl("Stiffness", QuantityFactory.Pressure);
+         return result;
+      }
+
       public static IPropertySingleValue CreatePoissonRatio()
       {
          return new SingleValueImpl("PossonRatio", QuantityFactory.Dimensionless, ValueBoundFactory.Create(0.0, ValueBoundType.GE), ValueBoundFactory.Create(0.5, ValueBoundType.LE));

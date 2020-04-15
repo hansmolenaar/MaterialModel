@@ -16,6 +16,7 @@ namespace MaterialModel.Plugin
       private const string s_youngAndPoisson = "Young+Poisson";
       private const string s_bulkAndShear = "Bulk and Shear Modulus";
       public const string TranseverseIsotropic = "Transverse Isotropic";
+      public const string FullyAnisotropic = "Fully Anisotropic";
       public const string LinearThermalExpansion = "Linear Thermal Expansion";
       private static IMaterialModelProperty[] m_components = new IMaterialModelProperty[] {
          new MaterialModelProperty(PropertySingleValueFactory.CreateYoungModulus(), s_youngAndPoisson),
@@ -29,6 +30,29 @@ namespace MaterialModel.Plugin
          new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " P"), TranseverseIsotropic),
          new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " PT"), TranseverseIsotropic),
          new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreatePoissonRatio(), " TP"), TranseverseIsotropic),
+
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NN_NN"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NN_EE"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NN_DD"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NN_NE"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NN_ND"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NN_ED"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " EE_EE"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " EE_DD"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " EE_NE"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " EE_ND"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " EE_ED"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " DD_DD"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " DD_NE"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " DD_ND"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " DD_ED"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NE_NE"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NE_ND"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " NE_ED"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " ND_ND"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " ND_ED"), FullyAnisotropic),
+         new MaterialModelProperty(PropertySingleValueFactory.CreateWithPostFix(PropertySingleValueFactory.CreateStiffness(), " ED_ED"), FullyAnisotropic),
+
          new MaterialModelProperty(PropertySingleValueFactory.CreateThermalExpansion(), LinearThermalExpansion),
       };
 

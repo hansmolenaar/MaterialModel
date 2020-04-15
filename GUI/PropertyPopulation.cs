@@ -9,14 +9,11 @@ namespace MaterialModel.GUI
 {
    public class PropertyPopulation : ControlBase
    {
-      public const string ElasticModelDefault = "-- Select Elastic Model --";
-
       public DataGrid MyDataGrid { get; }
 
       public PropertyPopulation(DataGrid dataGridProperties, AskMeAnything ame, IControl prev) : base(ame, prev)
       {
          MyDataGrid = dataGridProperties;
-         Clear();
       }
 
 
